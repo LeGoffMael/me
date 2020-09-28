@@ -1,0 +1,11 @@
+{
+  "name": "mael-welcome",
+  "version": "1.0.0",
+  "description": "Maël Le Goff's website",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css"
+  },
+  "author": "Maël Le Goff",
+  "license": "ISC"
+}
