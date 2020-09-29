@@ -1,9 +1,18 @@
-import * as Nodes  from '../scripts/threejs/examples/jsm/nodes/Nodes.js';
-import { NodePass }  from '../scripts/threejs/examples/jsm/nodes/postprocessing/NodePass.js';
-import { SceneUtils } from '../scripts/threejs/examples/jsm/utils/SceneUtils.js';
+import { gsap } from 'gsap';
+import { Noise } from 'noisejs';
 
-import { Wireframe } from '../scripts/threejs/examples/jsm/lines/Wireframe.js';
-import { WireframeGeometry2 } from '../scripts/threejs/examples/jsm/lines/WireframeGeometry2.js';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader';
+import { DotScreenShader } from 'three/examples/jsm/shaders/DotScreenShader';
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader';
+
+import * as Nodes  from 'three/examples/jsm/nodes/Nodes.js';
+import { NodePass }  from 'three/examples/jsm/nodes/postprocessing/NodePass.js';
+import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js';
 
 const main = document.getElementById( 'container' );
 const canvas = document.getElementById( 'background' );
@@ -40,11 +49,11 @@ class MainScene {
 		let planet;
 
 		// model
-		this.loader = new THREE.GLTFLoader(this.loadingManager);
+		this.loader = new GLTFLoader(this.loadingManager);
 		this.model = new THREE.Group();
 
 		// postprocessing
-		this.composer = new THREE.EffectComposer( this.renderer );
+		this.composer = new EffectComposer( this.renderer );
 		this.composer.setSize(window.innerWidth, window.innerHeight + bonusH);
 		
 		// node
@@ -146,19 +155,17 @@ class MainScene {
 					ease: 'Power2.easeInOut'
 				});
 				
-				let sphereAxis = new THREE.AxesHelper(5);
-				that.model.add(sphereAxis);
-				
 				that.scene.add(that.model);
 			},
 			// called while loading is progressing
 			function ( xhr ) {
 				console.log( ( xhr.loaded / xhr.total * 100 ) + '% model loaded' );
 			},
+			/*
 			// called when loading has errors
 			function ( error ) {
 				console.log( 'An error happened while loading model' );
-			}
+			} */
 		);
 	}
 	
@@ -235,20 +242,20 @@ class MainScene {
 	
 	postProcessing() {
 		// postprocessing
-		this.composer.addPass( new THREE.RenderPass( this.scene, this.camera ) );
+		this.composer.addPass( new RenderPass( this.scene, this.camera ) );
 
 		// dot shaders
-		let dotEffect = new THREE.ShaderPass( THREE.DotScreenShader );	
+		let dotEffect = new ShaderPass( DotScreenShader );	
 		dotEffect.uniforms[ 'scale' ].value = 5;
 		this.composer.addPass( dotEffect );
 		
 		// RGB splitter shader
-		// let rgbEffect = new THREE.ShaderPass( THREE.RGBShiftShader );
+		// let rgbEffect = new ShaderPass( RGBShiftShader );
 		// rgbEffect.uniforms[ 'amount' ].value = 0.002;
 		// this.composer.addPass( rgbEffect );
 		
 		// copy shader to avoid error message
-		let copyPass = new THREE.ShaderPass( THREE.CopyShader );
+		let copyPass = new ShaderPass( CopyShader );
 		this.composer.addPass( copyPass );
 		
 		// invert colors
