@@ -7,7 +7,7 @@ let config = {
     entry: "./src/index.js",
     output: {
         path: path.resolve(__dirname, "./public"),
-        filename: "./script.js"
+        filename: "./main.js"
     },
     module: {
         rules: [{

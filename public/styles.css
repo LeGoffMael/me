@@ -86,6 +86,8 @@ body {
     align-items: center;
     height: 100%;
     margin: auto; }
+    #loading-screen #loader h2, #loading-screen #loader h3 {
+      margin: 2px; }
 
 /* Loader */
 @-webkit-keyframes spin {

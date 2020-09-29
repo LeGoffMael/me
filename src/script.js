@@ -21,7 +21,7 @@ main.appendChild( canvas );
 const noise = new Noise(Math.random());
 const bonusH = 15 * window.innerHeight / 100;
 
-class MainScene {
+export class MainScene {
 	constructor() {
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
@@ -45,8 +45,9 @@ class MainScene {
 		this.noise = [];
 		this.offset = 0.0;
 		
-		//planet
-		let planet;
+		//moon
+		let moon;
+		let moon2;
 
 		// model
 		this.loader = new GLTFLoader(this.loadingManager);
@@ -72,14 +73,14 @@ class MainScene {
 		this.buildModel = this.buildModel.bind(this);
 		this.buildGeom = this.buildGeom.bind(this);
 		this.buildTerrain = this.buildTerrain.bind(this);
-		this.buildPlanet = this.buildPlanet.bind(this);
+		this.buildMoons = this.buildMoons.bind(this);
 		this.buildLight = this.buildLight.bind(this);
 	}
 
 	buildGeom() {
 		this.buildModel();
 		this.buildTerrain();
-		this.buildPlanet();
+		this.buildMoons();
 		this.buildLight();
 	}
 
@@ -113,20 +114,31 @@ class MainScene {
 		return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
 	}
 	
-	buildPlanet() {
-		this.planet = SceneUtils.createMultiMaterialObject(
+	buildMoons() {
+		const material1 = new THREE.MeshLambertMaterial({
+			color: 0x444400
+		});
+		const material2 = new THREE.MeshBasicMaterial({
+			color: 0xffffff,
+			wireframe: true
+		})
+
+		this.moon = SceneUtils.createMultiMaterialObject(
 			new THREE.IcosahedronGeometry(300, 3), [
-				new THREE.MeshLambertMaterial({
-					color: 0x444400
-				}),
-				new THREE.MeshBasicMaterial({
-					color: 0xffffff,
-					wireframe: true
-				})
+				material1, material2
 			]
 		);
-		this.planet.position.set(-400, 1100, 0);
-		this.scene.add(this.planet);
+		this.moon.position.set(-400, 1100, 0);
+
+		this.moon2= SceneUtils.createMultiMaterialObject(
+			new THREE.IcosahedronGeometry(50, 3), [
+				material1, material2
+			]
+		);
+		this.moon2.position.set(-100, 900, 50);
+
+		this.scene.add(this.moon);
+		this.scene.add(this.moon2);
 	}
 
 	// Load the 3D model
@@ -161,11 +173,10 @@ class MainScene {
 			function ( xhr ) {
 				console.log( ( xhr.loaded / xhr.total * 100 ) + '% model loaded' );
 			},
-			/*
 			// called when loading has errors
 			function ( error ) {
 				console.log( 'An error happened while loading model' );
-			} */
+			}
 		);
 	}
 	
@@ -250,30 +261,34 @@ class MainScene {
 		this.composer.addPass( dotEffect );
 		
 		// RGB splitter shader
-		// let rgbEffect = new ShaderPass( RGBShiftShader );
-		// rgbEffect.uniforms[ 'amount' ].value = 0.002;
-		// this.composer.addPass( rgbEffect );
+		/*
+		let rgbEffect = new ShaderPass( RGBShiftShader );
+		rgbEffect.uniforms[ 'amount' ].value = 0.002;
+		this.composer.addPass( rgbEffect );
+		*/
 		
 		// copy shader to avoid error message
 		let copyPass = new ShaderPass( CopyShader );
 		this.composer.addPass( copyPass );
 		
 		// invert colors
-		// this.composer.addPass( this.nodepass );
+		/*
+		this.composer.addPass( this.nodepass );
 		
-		// let alpha = new Nodes.FloatNode( 1 );
-		// let screen = new Nodes.ScreenNode();
-		// let inverted = new Nodes.MathNode( screen, Nodes.MathNode.INVERT );
+		let alpha = new Nodes.FloatNode( 1 );
+		let screen = new Nodes.ScreenNode();
+		let inverted = new Nodes.MathNode( screen, Nodes.MathNode.INVERT );
 
-		// let fade = new Nodes.MathNode(
-			// screen,
-			// inverted,
-			// alpha,
-			// Nodes.MathNode.MIX
-		// );
+		let fade = new Nodes.MathNode(
+			 screen,
+			 inverted,
+			 alpha,
+			 Nodes.MathNode.MIX
+		 );
 
-		// this.nodepass.input = fade;
-		// this.nodepass.needsUpdate = true;
+		 this.nodepass.input = fade;
+		this.nodepass.needsUpdate = true;
+		*/
 	}
 	
 	handleResize() {		
@@ -302,8 +317,11 @@ class MainScene {
 
 		this.offset += 0.25;
 		
-		this.planet.rotateZ(-0.0005);
-		this.planet.rotateY(0.0005);
+		this.moon.rotateZ(-0.0005);
+		this.moon.rotateY(0.0005);
+
+		this.moon2.rotateZ(0.001);
+		this.moon2.rotateY(-0.002);
 
 		this.terrain.geometry.verticesNeedUpdate = true;
 		requestAnimationFrame(this.animate);
@@ -314,8 +332,3 @@ class MainScene {
 		this.composer.render();
 	}
 }
-
-const env = new MainScene();
-env.buildGeom();
-env.postProcessing();
-env.animate();
