@@ -24,7 +24,7 @@ const bonusH = 15 * window.innerHeight / 100;
 export class MainScene {
 	constructor() {
 		this.scene = new THREE.Scene();
-		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
 		this.camera.rotation.x = THREE.Math.degToRad(72);
 		this.renderer = new THREE.WebGLRenderer();
 		this.renderer.setSize(window.innerWidth, window.innerHeight + bonusH);
@@ -46,8 +46,9 @@ export class MainScene {
 		this.offset = 0.0;
 		
 		//moon
-		let moon;
-		let moon2;
+		this.planetRing = new THREE.Group();
+		this.count = 0;
+		this.moon;
 
 		// model
 		this.loader = new GLTFLoader(this.loadingManager);
@@ -62,6 +63,11 @@ export class MainScene {
 		this.clock = new THREE.Clock();
 		this.frame = new Nodes.NodeFrame();
 
+		let that = this;
+		document.addEventListener('mousemove', function(e) {
+			that.moveJoint(that.getMousePos(e), 15);
+		});
+
 		this.bindFuncs = this.bindFuncs.bind(this);
 		this.bindFuncs();
 	}
@@ -73,14 +79,14 @@ export class MainScene {
 		this.buildModel = this.buildModel.bind(this);
 		this.buildGeom = this.buildGeom.bind(this);
 		this.buildTerrain = this.buildTerrain.bind(this);
-		this.buildMoons = this.buildMoons.bind(this);
+		this.buildPlanetMoon = this.buildPlanetMoon.bind(this);
 		this.buildLight = this.buildLight.bind(this);
 	}
 
 	buildGeom() {
 		this.buildModel();
 		this.buildTerrain();
-		this.buildMoons();
+		this.buildPlanetMoon();
 		this.buildLight();
 	}
 
@@ -114,31 +120,42 @@ export class MainScene {
 		return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
 	}
 	
-	buildMoons() {
+	buildPlanetMoon() {
 		const material1 = new THREE.MeshLambertMaterial({
 			color: 0x444400
 		});
 		const material2 = new THREE.MeshBasicMaterial({
 			color: 0xffffff,
 			wireframe: true
-		})
+		});
 
-		this.moon = SceneUtils.createMultiMaterialObject(
+		const planet = SceneUtils.createMultiMaterialObject(
 			new THREE.IcosahedronGeometry(300, 3), [
 				material1, material2
 			]
 		);
-		this.moon.position.set(-400, 1100, 0);
+		planet.position.set(-400, 1100, 0);
 
-		this.moon2= SceneUtils.createMultiMaterialObject(
+		this.planetRing.add(planet);
+
+		const ringMaterial = new THREE.MeshBasicMaterial( { color: 0xeee000 } );
+		const ringGeo = new THREE.RingGeometry( 340, 500, 100, 10 );
+		const ring = new THREE.Mesh( ringGeo, ringMaterial );
+		ring.position.copy(planet.position);
+		ring.rotateZ(THREE.Math.degToRad(90));
+		ring.rotateX(THREE.Math.degToRad(35));
+
+		this.planetRing.add(ring);
+
+		this.moon= SceneUtils.createMultiMaterialObject(
 			new THREE.IcosahedronGeometry(50, 3), [
 				material1, material2
 			]
 		);
-		this.moon2.position.set(-100, 900, 50);
+		this.moon.position.set(-100, 900, 50);
 
+		this.scene.add(this.planetRing);
 		this.scene.add(this.moon);
-		this.scene.add(this.moon2);
 	}
 
 	// Load the 3D model
@@ -304,24 +321,25 @@ export class MainScene {
 	}
 	
 	animate() {
-		let that = this;
-		document.addEventListener('mousemove', function(e) {
-			that.moveJoint(that.getMousePos(e), 15);
-		});
 		window.addEventListener('resize',this.handleResize(), false);
-
+		
 		this.noise.forEach((noiseVal, index) => {
 			const planeIndex = Math.floor((index + this.offset) % this.terrain.geometry.vertices.length);
 			this.terrain.geometry.vertices[planeIndex].z = noiseVal;
 		});
 
 		this.offset += 0.25;
-		
-		this.moon.rotateZ(-0.0005);
-		this.moon.rotateY(0.0005);
 
-		this.moon2.rotateZ(0.001);
-		this.moon2.rotateY(-0.002);
+		this.planetRing.children[0].rotateZ(-0.0005);
+		this.count += 1;
+		// Alternate up and down every 500 animations
+		if(Math.floor(this.count/500) % 2 === 0)
+			this.planetRing.children[1].rotateX(-0.0005); // ring rotation up
+		else
+			this.planetRing.children[1].rotateX(+0.0005); // ring rotation down
+		
+		this.moon.rotateZ(0.001);
+		this.moon.rotateY(-0.002);
 
 		this.terrain.geometry.verticesNeedUpdate = true;
 		requestAnimationFrame(this.animate);
