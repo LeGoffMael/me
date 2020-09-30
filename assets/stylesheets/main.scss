@@ -31,11 +31,6 @@ body {
         left: 10%;
         right: 10%;
 
-        // Window width >= 576px
-        @include md {
-            font-size: 5em;
-        }
-
         h1, h2 {
           position: relative;
           margin : 0;

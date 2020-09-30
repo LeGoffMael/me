@@ -14,10 +14,16 @@ import * as Nodes  from 'three/examples/jsm/nodes/Nodes.js';
 import { NodePass }  from 'three/examples/jsm/nodes/postprocessing/NodePass.js';
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js';
 
+import * as Stats from 'stats.js';
+
 const canvas = document.getElementById( 'background' );
 
 const noise = new Noise(Math.random());
 const bonusH = 15 * window.innerHeight / 100;
+
+let stats = new Stats();
+stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
 
 export class MainScene {
 	constructor() {
@@ -102,7 +108,9 @@ export class MainScene {
 		  // Due to limitations of the OpenGL Core Profile with the WebGL renderer on most platforms linewidth will always be 1 regardless of the set value.
 		  wireframeLinewidth: 2.0,
 		});
-		const plane = new THREE.PlaneGeometry(50, 1000, 60, 600);
+		const maxTerrainWidth = 250;
+		console.log(maxTerrainWidth);
+		const plane = new THREE.PlaneGeometry(50, maxTerrainWidth, 60, maxTerrainWidth / (5/3));
 
 		for (let i = 0, l = plane.vertices.length; i < l; i += 1) {
 		  const { x, y } = plane.vertices[i];
@@ -139,7 +147,7 @@ export class MainScene {
 		this.planetRing.add(planet);
 
 		const ringMaterial = new THREE.MeshBasicMaterial( { color: 0xeee000 } );
-		const ringGeo = new THREE.RingGeometry( 340, 500, 100, 10 );
+		const ringGeo = new THREE.RingGeometry( 340, 500, 100, 1 );
 		const ring = new THREE.Mesh( ringGeo, ringMaterial );
 		ring.position.copy(planet.position);
 		ring.rotateZ(THREE.Math.degToRad(90));
@@ -321,6 +329,8 @@ export class MainScene {
 	}
 	
 	animate() {
+		stats.begin();
+
 		window.addEventListener('resize',this.handleResize(), false);
 		
 		this.noise.forEach((noiseVal, index) => {
@@ -342,6 +352,8 @@ export class MainScene {
 		this.moon.rotateY(-0.002);
 
 		this.terrain.geometry.verticesNeedUpdate = true;
+
+		stats.end();
 		requestAnimationFrame(this.animate);
 		
 		let delta = this.clock.getDelta();

@@ -22,9 +22,6 @@ body {
     top: 20%;
     left: 10%;
     right: 10%; }
-    @media (min-width: 768px) {
-      #container.loaded #presentation #title {
-        font-size: 5em; } }
     #container.loaded #presentation #title h1, #container.loaded #presentation #title h2 {
       position: relative;
       margin: 0; }
