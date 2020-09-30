@@ -10,6 +10,7 @@
   "author": "Maël Le Goff",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.0",
     "gsap": "^3.5.1",
     "noisejs": "^2.1.0",
     "three": "^0.120.1"

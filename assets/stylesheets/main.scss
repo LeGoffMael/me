@@ -1,0 +1,122 @@
+@import '_media';
+
+body {
+    overflow-x: hidden;
+    margin: 0;
+    /* 	font-family: Helvetica; */
+    font-family: 'Montserrat';
+    color: #fff;
+    background-color: #000;
+
+    a {
+        text-decoration: none;
+        color: #fff;
+        border-bottom: 1px solid #fff;
+        display: inline-block;
+    }
+  }
+  
+  #container.loaded {
+    display: flex;
+    flex-direction: column;
+
+    #presentation {
+      #title {
+        position: absolute;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 4em;
+
+        top: 20%;
+        left: 10%;
+        right: 10%;
+
+        // Window width >= 576px
+        @include md {
+            font-size: 5em;
+        }
+
+        h1, h2 {
+          position: relative;
+          margin : 0;
+  
+          & > span{
+            background-color: black;
+          }
+        }
+  
+        .position {
+          color: black;
+          text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+        }
+      }
+    }
+
+    #bottom {
+        margin: 5% 10% 0 10%;
+        font-weight: 300;
+
+        #description {
+            margin-bottom: 10%;
+            max-width: 750px;
+            
+            font-size: 1.3em;
+    
+            p {
+                margin-bottom: 2em;
+            }
+        }
+
+        footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            font-size: 1em;
+    
+            div {
+                flex: 1 1 0px;
+
+                &:nth-of-type(2) {
+                    margin: 0 30px 0 30px;
+                }
+
+                &.h-separation {
+                    border-top: 2px solid #fff;
+                    margin-top: 0.5em;
+                    padding-top: 30px;
+                    flex: 2;
+                }
+            }
+
+            #summary {
+                p:first-of-type {
+                    font-size: 1.2em;
+                    font-weight: 400;
+                    margin-top: 0;
+                    margin-bottom: 30px;
+                }
+            }
+
+            #networks {
+                margin-top: 1.3em;
+                display: flex;
+                flex-direction: row;
+
+                a {
+                    margin: 0px 15px 0 15px;
+                    border: none;
+                    font-size: 2em;
+
+                    &:first-of-type {
+                        margin-left: 0;
+                    }
+                    &:last-of-type {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    
+  }

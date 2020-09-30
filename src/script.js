@@ -14,9 +14,7 @@ import * as Nodes  from 'three/examples/jsm/nodes/Nodes.js';
 import { NodePass }  from 'three/examples/jsm/nodes/postprocessing/NodePass.js';
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js';
 
-const main = document.getElementById( 'container' );
 const canvas = document.getElementById( 'background' );
-main.appendChild( canvas );
 
 const noise = new Noise(Math.random());
 const bonusH = 15 * window.innerHeight / 100;
@@ -26,10 +24,12 @@ export class MainScene {
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
 		this.camera.rotation.x = THREE.Math.degToRad(72);
-		this.renderer = new THREE.WebGLRenderer();
+		this.renderer = new THREE.WebGLRenderer({
+			antialias: true,
+			canvas: canvas,
+		 });
 		this.renderer.setSize(window.innerWidth, window.innerHeight + bonusH);
 		this.renderer.setPixelRatio( window.devicePixelRatio );
-		canvas.appendChild(this.renderer.domElement);
 		this.camera.position.set(0, -80, 40);
 		
 		// loader
