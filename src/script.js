@@ -331,7 +331,7 @@ export class MainScene {
 	animate() {
 		stats.begin();
 
-		window.addEventListener('resize',this.handleResize(), false);
+		// window.addEventListener('resize', this.handleResize(), false);
 		
 		this.noise.forEach((noiseVal, index) => {
 			const planeIndex = Math.floor((index + this.offset) % this.terrain.geometry.vertices.length);

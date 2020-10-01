@@ -35,7 +35,7 @@ body {
           position: relative;
           margin : 0;
   
-          & > span{
+          & > span {
             background-color: black;
           }
         }
@@ -67,6 +67,7 @@ body {
             flex-direction: row;
             justify-content: space-between;
             font-size: 1em;
+            margin-bottom: 3%;
     
             div {
                 flex: 1 1 0px;
@@ -92,26 +93,33 @@ body {
                 }
             }
 
-            #networks {
-                margin-top: 1.3em;
-                display: flex;
-                flex-direction: row;
-
+            #contact {
                 a {
-                    margin: 0px 15px 0 15px;
                     border: none;
-                    font-size: 2em;
+                }
 
-                    &:first-of-type {
-                        margin-left: 0;
-                    }
-                    &:last-of-type {
-                        margin-right: 0;
+                #networks {
+                    margin-top: 1.3em;
+                    display: flex;
+                    flex-direction: row;
+    
+                    a {
+                        margin: 0px 15px 0 15px;
+                        font-size: 2em;
+    
+                        &:first-of-type {
+                            margin-left: 0;
+                        }
+                        &:last-of-type {
+                            margin-right: 0;
+                        }
                     }
                 }
             }
+            
+            #license p:first-of-type {
+                margin-top: 0;
+            }
         }
     }
-
-    
   }
