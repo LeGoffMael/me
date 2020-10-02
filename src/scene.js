@@ -21,6 +21,7 @@ const canvas = document.getElementById( 'background' );
 const noise = new Noise(Math.random());
 const bonusH = 15 * window.innerHeight / 100;
 let width = window.innerWidth;
+let height = window.innerHeight;
 
 /*
 let stats = new Stats();
@@ -112,7 +113,7 @@ export class BackgroundScene {
 		const material = new THREE.MeshLambertMaterial({
 		  wireframe: true,
 		  // Due to limitations of the OpenGL Core Profile with the WebGL renderer on most platforms linewidth will always be 1 regardless of the set value.
-		  wireframeLinewidth: 2.0,
+		  // wireframeLinewidth: 2.0,
 		});
 		const maxTerrainWidth = 250;
 		const plane = new THREE.PlaneGeometry(50, maxTerrainWidth, 60, maxTerrainWidth / (5/3));
@@ -351,7 +352,7 @@ export class BackgroundScene {
 	
 	handleResize() {
 		// check for mobile devices when scroll showed up
-		if (window.innerWidth !== width) {
+		if (window.innerWidth !== width || window.innerHeight !== height) {
 			this.camera.aspect = window.innerWidth / window.innerHeight;
 			this.camera.updateProjectionMatrix();
 			
