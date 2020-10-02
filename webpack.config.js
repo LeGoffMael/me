@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
 let config = {
     mode: "development",
@@ -25,6 +26,7 @@ let config = {
     },
     plugins: [
         new ExtractTextWebpackPlugin("styles.css"),
+        new UglifyJSPlugin()
     ]
 }
 

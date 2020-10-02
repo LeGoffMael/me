@@ -36,14 +36,14 @@ body {
     #container.loaded #bottom #description {
       margin-bottom: 10%;
       max-width: 750px;
-      font-size: 1.3em; }
+      font-size: 1.5em; }
       #container.loaded #bottom #description p {
         margin-bottom: 2em; }
     #container.loaded #bottom footer {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      font-size: 1em;
+      font-size: 1.2em;
       margin-bottom: 3%; }
       #container.loaded #bottom footer div {
         flex: 1 1 0px; }
