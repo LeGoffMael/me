@@ -14,16 +14,19 @@ import * as Nodes  from 'three/examples/jsm/nodes/Nodes.js';
 import { NodePass }  from 'three/examples/jsm/nodes/postprocessing/NodePass.js';
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js';
 
-import * as Stats from 'stats.js';
+// import * as Stats from 'stats.js';
 
 const canvas = document.getElementById( 'background' );
 
 const noise = new Noise(Math.random());
 const bonusH = 15 * window.innerHeight / 100;
+let width = window.innerWidth;
 
+/*
 let stats = new Stats();
 stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild( stats.dom );
+*/
 
 export class MainScene {
 	constructor() {
@@ -109,7 +112,6 @@ export class MainScene {
 		  wireframeLinewidth: 2.0,
 		});
 		const maxTerrainWidth = 250;
-		console.log(maxTerrainWidth);
 		const plane = new THREE.PlaneGeometry(50, maxTerrainWidth, 60, maxTerrainWidth / (5/3));
 
 		for (let i = 0, l = plane.vertices.length; i < l; i += 1) {
@@ -316,23 +318,23 @@ export class MainScene {
 		*/
 	}
 	
-	handleResize() {		
-		this.camera.aspect = window.innerWidth / window.innerHeight;
-		this.camera.updateProjectionMatrix();
-		
-		this.renderer.setSize(window.innerWidth, window.innerHeight + bonusH);
-		this.composer.setSize(window.innerWidth, window.innerHeight + bonusH);
-		
-		this.setModelXPosition();
-		
-		this.composer.render();
+	handleResize() {
+		// check for mobile devices when scroll showed up
+		if (window.innerWidth !== width) {
+			this.camera.aspect = window.innerWidth / window.innerHeight;
+			this.camera.updateProjectionMatrix();
+			
+			this.renderer.setSize(window.innerWidth, window.innerHeight + bonusH);
+			this.composer.setSize(window.innerWidth, window.innerHeight + bonusH);
+			
+			this.setModelXPosition();
+		}
 	}
 	
 	animate() {
-		stats.begin();
+		// stats.begin();
+		window.addEventListener('resize', this.handleResize, false);
 
-		// window.addEventListener('resize', this.handleResize(), false);
-		
 		this.noise.forEach((noiseVal, index) => {
 			const planeIndex = Math.floor((index + this.offset) % this.terrain.geometry.vertices.length);
 			this.terrain.geometry.vertices[planeIndex].z = noiseVal;
@@ -353,7 +355,7 @@ export class MainScene {
 
 		this.terrain.geometry.verticesNeedUpdate = true;
 
-		stats.end();
+		// stats.end();
 		requestAnimationFrame(this.animate);
 		
 		let delta = this.clock.getDelta();

@@ -7,11 +7,10 @@
 	height: 100%;
 	background-color: #000;
   opacity: 1;
- 	transition: visibility 0s, opacity 0.4s linear;
+ 	transition: visibility 0.4s, opacity 0.4s linear;
 
   &.loaded {
     opacity: 0;
-    height: 0;
     visibility: hidden;
   }
 

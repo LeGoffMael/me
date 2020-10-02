@@ -1,38 +1,42 @@
 /* Mask */
-.fo-mask, .fo-mask2 {
+
+#container.loaded {
+  .fo-mask, .fo-mask2 {
     display: inline-block;
     overflow: hidden;
     clear: both;
+  }
+  .fo-mask span {
+      color: transparent;
+      -webkit-animation: show 0s forwards 0.4s;
+      animation: show 0s forwards 0.4s;
+  }
+  .fo-mask2 span {
+      color: black;
+      -webkit-animation: show2 0s forwards 0.4s;
+      animation: show2 0s forwards 0.4s;
+      -webkit-animation-delay: 0.6s;
+      animation-delay: 0.6s;
+  }
+  .fo-mask2:after {
+      -webkit-animation-delay: 0.2s;
+      animation-delay: 0.2s;
+  }
+  .fo-mask:after, .fo-mask2:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: white;
+      -webkit-transform: translate3d(110%, 0, 0);
+      transform: translate3d(110%, 0, 0);
+      -webkit-animation: left-to-right 1s cubic-bezier(.17,.67,.83,.67);
+      animation: left-to-right 1s cubic-bezier(.17,.67,.83,.67);
+  }
 }
-.fo-mask span {
-    color: transparent;
-    -webkit-animation: show 0s forwards 0.4s;
-    animation: show 0s forwards 0.4s;
-}
-.fo-mask2 span {
-    color: black;
-    -webkit-animation: show2 0s forwards 0.4s;
-    animation: show2 0s forwards 0.4s;
-    -webkit-animation-delay: 0.6s;
-    animation-delay: 0.6s;
-}
-.fo-mask2:after {
-    -webkit-animation-delay: 0.2s;
-    animation-delay: 0.2s;
-}
-.fo-mask:after, .fo-mask2:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: white;
-    -webkit-transform: translate3d(110%, 0, 0);
-    transform: translate3d(110%, 0, 0);
-    -webkit-animation: left-to-right 1s cubic-bezier(.17,.67,.83,.67);
-    animation: left-to-right 1s cubic-bezier(.17,.67,.83,.67);
-}
+
 
 // Animation
 /* Loader */
