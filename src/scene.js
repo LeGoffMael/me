@@ -185,7 +185,7 @@ export class BackgroundScene {
 		  	starGeo.vertices.push(star);
 		}
 
-		let sprite = new THREE.TextureLoader().load('ressources/img/star.png');
+		let sprite = new THREE.TextureLoader().load('resources/img/star.png');
 		let starMaterial = new THREE.PointsMaterial({
 			color: 0xaaaaaa,
 			size: 0.7,
@@ -205,7 +205,7 @@ export class BackgroundScene {
 		// Load a glTF resource
 		this.loader.load(
 			// resource URL
-			'ressources/model/scene.gltf',
+			'resources/model/scene.gltf',
 			// called when the resource is loaded
 			function(data) {
 				that.model = data.scene;
