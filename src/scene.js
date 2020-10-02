@@ -31,7 +31,7 @@ document.body.appendChild( stats.dom );
 export class BackgroundScene {
 	constructor() {
 		this.scene = new THREE.Scene();
-		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / (window.innerHeight + bonusH), 1, 2000);
+		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
 		this.camera.rotation.x = THREE.Math.degToRad(72);
 		this.renderer = new THREE.WebGLRenderer({
 			antialias: true,
