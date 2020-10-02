@@ -28,7 +28,7 @@ stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild( stats.dom );
 */
 
-export class MainScene {
+export class BackgroundScene {
 	constructor() {
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
@@ -89,13 +89,16 @@ export class MainScene {
 		this.buildGeom = this.buildGeom.bind(this);
 		this.buildTerrain = this.buildTerrain.bind(this);
 		this.buildPlanetMoon = this.buildPlanetMoon.bind(this);
+		this.buildStars = this.buildStars.bind(this);
 		this.buildLight = this.buildLight.bind(this);
 	}
 
 	buildGeom() {
-		this.buildModel();
 		this.buildTerrain();
 		this.buildPlanetMoon();
+		this.buildStars();
+		// end of loader
+		this.buildModel();
 		this.buildLight();
 	}
 
@@ -168,13 +171,41 @@ export class MainScene {
 		this.scene.add(this.moon);
 	}
 
+	buildStars() {
+		let starGeo = new THREE.Geometry();
+
+		const starXCoeff = 1000 * (window.innerWidth/window.innerHeight);
+		const starZCoeff = 600;
+		for(let i=0; i<3000; i++) {
+			let star = new THREE.Vector3(
+				Math.random() * starXCoeff,
+				0,
+				Math.random() * starZCoeff
+		  	);
+		  	starGeo.vertices.push(star);
+		}
+
+		let sprite = new THREE.TextureLoader().load('ressources/img/star.png');
+		let starMaterial = new THREE.PointsMaterial({
+			color: 0xaaaaaa,
+			size: 0.7,
+			map: sprite
+		});
+
+		let stars = new THREE.Points(starGeo, starMaterial);
+		stars.position.set(-starXCoeff/2, 1000, -400);
+		// invert rotation of camera
+		stars.rotation.x = THREE.Math.degToRad(-18);
+		this.scene.add(stars);
+	}
+
 	// Load the 3D model
 	buildModel() {
 		let that = this;
 		// Load a glTF resource
 		this.loader.load(
 			// resource URL
-			'models/basic-head/scene.gltf',
+			'ressources/model/scene.gltf',
 			// called when the resource is loaded
 			function(data) {
 				that.model = data.scene;
