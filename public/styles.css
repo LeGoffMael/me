@@ -4,7 +4,8 @@ body {
   font-family: Helvetica;
   /* 	font-family: 'Montserrat'; */
   color: #fff;
-  background-color: #000; }
+  background-color: #000;
+  cursor: crosshair; }
   body a {
     text-decoration: none;
     color: #fff;
@@ -18,15 +19,21 @@ body {
     position: absolute;
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 4em;
+    font-size: 2em;
     top: 20%;
     left: 10%;
     right: 10%; }
+    @media (min-width: 576px) {
+      #container.loaded #presentation #title {
+        font-size: 4em; } }
     #container.loaded #presentation #title h1, #container.loaded #presentation #title h2 {
       position: relative;
       margin: 0; }
       #container.loaded #presentation #title h1 > span, #container.loaded #presentation #title h2 > span {
         background-color: black; }
+    @media (max-width: 576px) {
+      #container.loaded #presentation #title h2 {
+        margin-top: 5px; } }
     #container.loaded #presentation #title .position {
       color: black;
       text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; }
@@ -36,6 +43,7 @@ body {
     #container.loaded #bottom #description {
       margin-bottom: 10%;
       max-width: 750px;
+      text-align: justify;
       font-size: 1.5em; }
       #container.loaded #bottom #description p {
         margin-bottom: 2em; }
@@ -43,28 +51,45 @@ body {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      font-size: 1.2em;
-      margin-bottom: 3%; }
+      flex-wrap: wrap;
+      font-size: 1em; }
+      @media (max-width: 576px) {
+        #container.loaded #bottom footer {
+          margin-top: 10%;
+          flex-direction: column; } }
       #container.loaded #bottom footer div {
         flex: 1 1 0px; }
+        @media (max-width: 576px) {
+          #container.loaded #bottom footer div {
+            text-align: center; } }
         #container.loaded #bottom footer div:nth-of-type(2) {
           margin: 0 30px 0 30px; }
         #container.loaded #bottom footer div.h-separation {
           border-top: 2px solid #fff;
           margin-top: 0.5em;
           padding-top: 30px;
+          padding-bottom: 30px;
           flex: 2; }
+          @media (max-width: 576px) {
+            #container.loaded #bottom footer div.h-separation {
+              padding-top: 15px;
+              padding-bottom: 15px; } }
       #container.loaded #bottom footer #summary p:first-of-type {
         font-size: 1.2em;
-        font-weight: 400;
-        margin-top: 0;
-        margin-bottom: 30px; }
+        font-weight: 700;
+        margin-top: 0; }
+        @media (min-width: 576px) {
+          #container.loaded #bottom footer #summary p:first-of-type {
+            margin-bottom: 30px; } }
       #container.loaded #bottom footer #contact a {
         border: none; }
       #container.loaded #bottom footer #contact #networks {
         margin-top: 1.3em;
         display: flex;
         flex-direction: row; }
+        @media (max-width: 576px) {
+          #container.loaded #bottom footer #contact #networks {
+            justify-content: center; } }
         #container.loaded #bottom footer #contact #networks a {
           margin: 0px 15px 0 15px;
           font-size: 2em; }
@@ -76,6 +101,7 @@ body {
         margin-top: 0; }
 
 #loading-screen {
+  font-size: 1em;
   position: absolute;
   z-index: 2;
   top: 0;

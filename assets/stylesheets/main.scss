@@ -7,6 +7,7 @@ body {
     /* 	font-family: 'Montserrat'; */
     color: #fff;
     background-color: #000;
+    cursor: crosshair;
 
     a {
         text-decoration: none;
@@ -25,11 +26,15 @@ body {
         position: absolute;
         text-transform: uppercase;
         font-weight: 700;
-        font-size: 4em;
+        font-size: 2em;
 
         top: 20%;
         left: 10%;
         right: 10%;
+
+        @include sm {
+            font-size: 4em;
+        }
 
         h1, h2 {
           position: relative;
@@ -38,6 +43,12 @@ body {
           & > span {
             background-color: black;
           }
+        }
+
+        @include sm-max {
+            h2 {
+                margin-top: 5px;
+            }
         }
   
         .position {
@@ -55,6 +66,7 @@ body {
             margin-bottom: 10%;
             max-width: 750px;
             
+            text-align: justify;
             font-size: 1.5em;
     
             p {
@@ -66,11 +78,20 @@ body {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            font-size: 1.2em;
-            margin-bottom: 3%;
+            flex-wrap: wrap;
+            font-size: 1em;
+
+            @include sm-max {
+                margin-top: 10%;
+                flex-direction: column;
+            }
     
             div {
                 flex: 1 1 0px;
+   
+                @include sm-max {
+                    text-align: center;
+                }
 
                 &:nth-of-type(2) {
                     margin: 0 30px 0 30px;
@@ -80,16 +101,25 @@ body {
                     border-top: 2px solid #fff;
                     margin-top: 0.5em;
                     padding-top: 30px;
+                    padding-bottom: 30px;
                     flex: 2;
+
+                    @include sm-max {
+                        padding-top: 15px;
+                        padding-bottom: 15px;
+                    }
                 }
             }
 
             #summary {
                 p:first-of-type {
                     font-size: 1.2em;
-                    font-weight: 400;
+                    font-weight: 700;
                     margin-top: 0;
-                    margin-bottom: 30px;
+
+                    @include sm {
+                        margin-bottom: 30px;
+                    }
                 }
             }
 
@@ -102,6 +132,10 @@ body {
                     margin-top: 1.3em;
                     display: flex;
                     flex-direction: row;
+
+                    @include sm-max {
+                        justify-content: center;
+                    }
     
                     a {
                         margin: 0px 15px 0 15px;
@@ -117,8 +151,10 @@ body {
                 }
             }
             
-            #license p:first-of-type {
-                margin-top: 0;
+            #license {
+                p:first-of-type {
+                    margin-top: 0;
+                }
             }
         }
     }

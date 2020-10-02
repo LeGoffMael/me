@@ -6,6 +6,12 @@
         @content;
     }
  }
+
+ @mixin sm-max {
+   @media (max-width: #{$screen-sm-min}) {
+       @content;
+   }
+}
   
  // Medium devices
  @mixin md {
