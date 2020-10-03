@@ -14,8 +14,8 @@ i18next.init({
             position: 'Software Engineer',
             description: [
                 'I am a Software Engineer recently <a href="https://www.utbm.fr/" target="_blank">graduated</a>.',
-                'Born in France I am now based <s>in Seoul, South Korea working as a full stack developer and UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a></s>.',
-                '<a href="http://www.v2.legoffmael.fr/resources/RESUME_LE_GOFF_MAEL.pdf" target="_blank">Check out</a> my resume and/or <a href="mailto:legoffmael@gmail.com" target="_blank">reach out</a> if you are interested by my works.'
+                'Born in France, I am now based <s>in Seoul, South Korea working as a full stack developer and UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a></s>.',
+                '<a href="http://www.v2.legoffmael.fr/resources/RESUME_LE_GOFF_MAEL.pdf" target="_blank">Check out</a> my resume or <a href="mailto:legoffmael@gmail.com" target="_blank">reach out</a> if you are interested by my works.'
             ],
             location: 'in <s>South Korea</s>',
             credits: [
@@ -33,9 +33,9 @@ i18next.init({
             name: 'Maël Le Goff',
             position: 'Ingénieur Logiciel',
             description: [
-                'Je suis un Ingénieur Informatique récemment <a href="https://www.utbm.fr/" target="_blank">diplomé</a>.',
-                'Né en France je vis désormais <s>à Séoul, Corée du Sud travaillant en tant que développeur full stack et UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a></s>.',
-                '<a href="http://www.v2.legoffmael.fr/resources/RESUME_LE_GOFF_MAEL.pdf" target="_blank">Téléchargez</a> mon CV et/ou <a href="mailto:legoffmael@gmail.com" target="_blank">contactez moi</a> si vous êtes intéressé par mon travail.'
+                'Je suis un Ingénieur informatique récemment <a href="https://www.utbm.fr/" target="_blank">diplômé</a>.',
+                'Né en France, je vis désormais <s>à Séoul, Corée du Sud travaillant en tant que développeur full stack et UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a></s>.',
+                '<a href="http://www.v2.legoffmael.fr/resources/RESUME_LE_GOFF_MAEL.pdf" target="_blank">Téléchargez</a> mon CV ou <a href="mailto:legoffmael@gmail.com" target="_blank">contactez-moi</a> si vous êtes intéressé par mon travail.'
             ],
             location: 'en <s>Corée du Sud</s>',
             credits: [
