@@ -31,15 +31,39 @@ body {
       margin: 0; }
       #container.loaded #presentation #title h1 > span, #container.loaded #presentation #title h2 > span {
         background-color: black; }
-    @media (max-width: 576px) {
-      #container.loaded #presentation #title h2 {
-        margin-top: 5px; } }
+    #container.loaded #presentation #title h2 {
+      margin-top: 5px; }
     #container.loaded #presentation #title .position {
       color: black;
       text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; }
   #container.loaded #bottom {
-    margin: 5% 10% 0 10%;
+    margin: 2% 10% 0 10%;
     font-weight: 300; }
+    #container.loaded #bottom #languages {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-bottom: 5%; }
+      #container.loaded #bottom #languages:before, #container.loaded #bottom #languages:after {
+        content: "";
+        flex: 1 1;
+        border-bottom: 2px solid #fff;
+        margin: auto; }
+      #container.loaded #bottom #languages:before {
+        margin-right: 10px; }
+      #container.loaded #bottom #languages:after {
+        margin-left: 10px; }
+      #container.loaded #bottom #languages button {
+        margin: 0px 20px 0 20px;
+        font-size: 1em;
+        border: none;
+        background: #000;
+        color: #fff;
+        cursor: pointer; }
+        #container.loaded #bottom #languages button:focus {
+          outline: none; }
+        #container.loaded #bottom #languages button.active {
+          border-bottom: 1px solid #fff; }
     #container.loaded #bottom #description {
       margin-bottom: 10%;
       max-width: 750px;
@@ -97,7 +121,7 @@ body {
             margin-left: 0; }
           #container.loaded #bottom footer #contact #networks a:last-of-type {
             margin-right: 0; }
-      #container.loaded #bottom footer #license p:first-of-type {
+      #container.loaded #bottom footer #credits p:first-of-type {
         margin-top: 0; }
 
 #loading-screen {

@@ -14,7 +14,12 @@ import * as Nodes  from 'three/examples/jsm/nodes/Nodes.js';
 import { NodePass }  from 'three/examples/jsm/nodes/postprocessing/NodePass.js';
 import { SceneUtils } from 'three/examples/jsm/utils/SceneUtils.js';
 
-// import * as Stats from 'stats.js';
+/*
+import * as Stats from 'stats.js';
+let stats = new Stats();
+stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
+*/
 
 const canvas = document.getElementById( 'background' );
 
@@ -22,12 +27,6 @@ const noise = new Noise(Math.random());
 const bonusH = 15 * window.innerHeight / 100;
 let width = window.innerWidth;
 let height = window.innerHeight;
-
-/*
-let stats = new Stats();
-stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild( stats.dom );
-*/
 
 export class BackgroundScene {
 	constructor() {
@@ -364,7 +363,7 @@ export class BackgroundScene {
 	}
 	
 	animate() {
-		// stats.begin();
+		//stats.begin();
 		window.addEventListener('resize', this.handleResize, false);
 
 		this.noise.forEach((noiseVal, index) => {
@@ -387,7 +386,7 @@ export class BackgroundScene {
 
 		this.terrain.geometry.verticesNeedUpdate = true;
 
-		// stats.end();
+		//stats.end();
 		requestAnimationFrame(this.animate);
 		
 		let delta = this.clock.getDelta();

@@ -45,10 +45,8 @@ body {
           }
         }
 
-        @include sm-max {
-            h2 {
-                margin-top: 5px;
-            }
+        h2 {
+            margin-top: 5px;
         }
   
         .position {
@@ -59,8 +57,46 @@ body {
     }
 
     #bottom {
-        margin: 5% 10% 0 10%;
+        margin: 2% 10% 0 10%;
         font-weight: 300;
+
+        #languages {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-bottom: 5%;
+
+            // horizontal line
+            &:before, &:after{
+                content: "";
+                flex: 1 1;
+                border-bottom: 2px solid #fff;
+                margin: auto;
+            }
+            &:before {
+            margin-right: 10px
+            }
+            &:after {
+            margin-left: 10px
+            }
+
+            button {
+                margin: 0px 20px 0 20px;
+                font-size: 1em;
+                border: none;
+                background: #000;
+                color: #fff;
+                cursor: pointer;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &.active {
+                    border-bottom: 1px solid #fff;
+                }
+            }
+        }
 
         #description {
             margin-bottom: 10%;
@@ -151,7 +187,7 @@ body {
                 }
             }
             
-            #license {
+            #credits {
                 p:first-of-type {
                     margin-top: 0;
                 }

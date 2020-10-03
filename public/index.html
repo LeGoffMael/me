@@ -26,32 +26,42 @@
 	<div id="loading-screen">
 		<div id="spinner"></div>
 		<div id="loader">
-			<h2>Loading...<h2>
-			<h3>It should not be long<h3>
+			<h2 id="18n-loading">Loading...<h2>
+			<h3 id="18n-loading-sub">It should not be long<h3>
 		</div>
 	</div>
 	
 	<div id="container">
 		<div id="presentation">
 			<div id="title">
-				<h1 class="fo-mask"><span class="name">Maël Le Goff</span></h1>
-				<h2 class="fo-mask2"><span class="position">Software Engineer</span></h2>
+				<h1 class="fo-mask"><span id="18n-name-1" class="name"></span></h1>
+				<br>
+				<h2 class="fo-mask2"><span id="18n-position" class="position"></span></h2>
 			</div>
 
 			<canvas id="background"></canvas>
 		</div>
 
 		<div id="bottom">
+			<div id="languages">
+				<button id="lang-en" class="active" onclick="window.changeLng('en')">
+					English
+				</button>
+				<button id="lang-fr" onclick="window.changeLng('fr')">
+					Français
+				</button>
+			</div>
+
 			<div id="description">
-				<p>I am a Software Engineer recently <a href="https://www.utbm.fr/" target="_blank">graduated</a>.</p>
-				<p>Born in France I am now based <s>in Seoul, South Korea working as a full stack developer and UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a></s>.</p>
-				<p><a href="http://www.v2.legoffmael.fr/resources/RESUME_LE_GOFF_MAEL.pdf" target="_blank">Check out</a> my resume and/or <a href="mailto:legoffmael@gmail.com" target="_blank">reach out</a> if you are interested by my works. </p>
+				<p id="18n-description-1"></p>
+				<p id="18n-description-2"></p>
+				<p id="18n-description-3"></p>
 			</div>
 
 			<footer>
 				<div id="summary">
-					<p>Maël Le Goff</p>
-					<p>Software Engineer <br> in <s>South Korea</s></p>
+					<p id="18n-name-2"></p>
+					<p id="18n-position-location"></p>
 				</div>
 		
 				<div id="contact" class="h-separation">
@@ -64,9 +74,9 @@
 					</div>
 				</div>
 		
-				<div id="license" class="h-separation">
-					<p>Many thanks to <a href="https://sketchfab.com/Epidural" target="_blank">@Epidural</a> how designed the <a href="https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7" target="_blank">3D model</a>.</p>
-					<p>© 2020 Designed and coded by Maël Le Goff.</p>
+				<div id="credits" class="h-separation">
+					<p id="18n-credits-1"></p>
+					<p id="18n-credits-2"></p>
 				</div>
 			</footer>
 		</div>

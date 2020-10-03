@@ -12,6 +12,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.0",
     "gsap": "^3.5.1",
+    "i18next": "^19.8.0",
     "noisejs": "^2.1.0",
     "three": "^0.120.1"
   },
