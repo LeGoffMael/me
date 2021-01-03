@@ -19,7 +19,7 @@ i18next.init({
             ],
             location: 'in <s>South Korea</s>',
             credits: [
-                'Many thanks to <a href="https://sketchfab.com/Epidural" target="_blank">@Epidural</a> how designed the <a href="https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7" target="_blank">3D model</a>.',
+                'Many thanks to <a href="https://sketchfab.com/Epidural" target="_blank">@Epidural</a> who designed the <a href="https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7" target="_blank">3D model</a>.',
                 '© 2020 Designed and coded by Maël Le Goff.'
             ],
             loading: {
