@@ -14,10 +14,10 @@ i18next.init({
             position: 'Software Engineer',
             description: [
                 'I am a Software Engineer recently <a href="https://www.utbm.fr/english/" target="_blank">graduated</a>.',
-                'Born in France, I am now based <s>in Seoul, South Korea working as a full stack developer and UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a></s>.',
+                'Born in France, I am now based in Seoul, South Korea working as a full stack developer and UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a>.',
                 '<a href="https://www.legoffmael.fr/resources/RESUME_LE_GOFF_MAEL.pdf" target="_blank">Check out</a> my resume or <a href="mailto:legoffmael@gmail.com" target="_blank">reach out</a> if you are interested by my works.'
             ],
-            location: 'in <s>South Korea</s>',
+            location: 'in South Korea',
             credits: [
                 'Many thanks to <a href="https://sketchfab.com/Epidural" target="_blank">@Epidural</a> who designed the <a href="https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7" target="_blank">3D model</a>.',
                 '© 2020 Designed and coded by Maël Le Goff.'
@@ -34,10 +34,10 @@ i18next.init({
             position: 'Ingénieur Logiciel',
             description: [
                 'Je suis un Ingénieur informatique récemment <a href="https://www.utbm.fr/" target="_blank">diplômé</a>.',
-                'Né en France, je vis désormais <s>à Séoul, Corée du Sud travaillant en tant que développeur full stack et UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a></s>.',
+                'Né en France, je vis désormais à Séoul, Corée du Sud travaillant en tant que développeur full stack et UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a>.',
                 '<a href="https://www.legoffmael.fr/resources/CV_LE_GOFF_MAEL.pdf" target="_blank">Téléchargez</a> mon CV ou <a href="mailto:legoffmael@gmail.com" target="_blank">contactez-moi</a> si vous êtes intéressé par mon travail.'
             ],
-            location: 'en <s>Corée du Sud</s>',
+            location: 'en Corée du Sud',
             credits: [
                 'Merci à <a href="https://sketchfab.com/Epidural" target="_blank">@Epidural</a> qui a conçu le <a href="https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7" target="_blank">modèle 3D</a>.',
                 '© 2020 Imaginé et codé par Maël Le Goff.'
