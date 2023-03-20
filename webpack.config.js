@@ -1,10 +1,13 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+const isDevMode = process.env.NODE_ENV === "development";
+
 
 let config = {
-    mode: "production",
+    mode: isDevMode ? "development" : "production",
     entry: "./src/index.js",
     output: {
         path: path.resolve(__dirname, "./public"),
@@ -27,15 +30,11 @@ let config = {
         }]
     },
     optimization: {
-        // concatenateModules: false, // used in dev to anaylse bundle sizes
-        minimize: true,
-        minimizer: [new TerserPlugin()],
+        concatenateModules: !isDevMode,
+        minimize: !isDevMode,
+        minimizer: isDevMode ? [] : [new TerserPlugin()],
     },
-    plugins: [
-        new MiniCssExtractPlugin({filename: "styles.css"}),
-        // used in dev to anaylse bundle sizes
-        // new BundleAnalyzerPlugin(),
-    ],
+    plugins: [new MiniCssExtractPlugin({filename: "styles.css"})].concat(isDevMode ? [new BundleAnalyzerPlugin()] : []),
 }
 
 module.exports = config;

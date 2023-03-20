@@ -2,12 +2,24 @@
 
 Use npm to install
 
-    npm install
+```
+npm install
+```
 
-Use webpack to start
+Use webpack to run it
 
-    npm run watch
-    
+On development (listen to changes)
+```
+npm run watch
+```
+
+On production
+```
+npm run build
+```
+
+---
+
 Tools used :
 - [three.js](https://threejs.org/) : 3D library
 - [i18n](https://www.i18next.com/) : Internationalization
