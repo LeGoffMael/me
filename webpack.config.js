@@ -1,10 +1,13 @@
-const webpack = require("webpack");
 const path = require("path");
-const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+const isDevMode = process.env.NODE_ENV === "development";
+
 
 let config = {
-    mode: "development",
+    mode: isDevMode ? "development" : "production",
     entry: "./src/index.js",
     output: {
         path: path.resolve(__dirname, "./public"),
@@ -18,16 +21,20 @@ let config = {
         },
         {
             test: /\.scss$/,
-            use: ExtractTextWebpackPlugin.extract({
-                fallback: 'style-loader',
-                use: ['css-loader', 'sass-loader', 'postcss-loader'],
-            })
+            use: [
+                MiniCssExtractPlugin.loader,
+                "css-loader",
+                "sass-loader",
+                "postcss-loader",
+            ],
         }]
     },
-    plugins: [
-        new ExtractTextWebpackPlugin("styles.css"),
-        new UglifyJSPlugin()
-    ]
+    optimization: {
+        concatenateModules: !isDevMode,
+        minimize: !isDevMode,
+        minimizer: isDevMode ? [] : [new TerserPlugin()],
+    },
+    plugins: [new MiniCssExtractPlugin({filename: "styles.css"})].concat(isDevMode ? [new BundleAnalyzerPlugin()] : []),
 }
 
 module.exports = config;
