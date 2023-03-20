@@ -27,8 +27,14 @@ jobs:
 
     - name: Build
       run: npm run build
+      
+    - name: Pages
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: "./public"
         
-    - name: Deploy GitHub Pages site
+    - name: Deploy to GitHub Pages
+      id: deployment
       uses: actions/deploy-pages@v2.0.0
       with:
-        publish_dir: ./public
+        token: ${{ secrets.GITHUB_TOKEN }}
