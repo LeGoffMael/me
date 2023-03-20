@@ -1,2 +1,6 @@
 node_modules
 /package-lock.json
+
+public/main.js
+public/main.js.LICENSE.txt
+public/styles.css
