@@ -1,7 +1,27 @@
 import { gsap } from 'gsap';
 import { Noise } from 'noisejs';
 
-import * as THREE from 'three';
+import{
+	BufferGeometry,
+	Group,
+	IcosahedronGeometry,
+	LoadingManager,
+	MathUtils,
+	Mesh,
+	MeshBasicMaterial,
+	MeshLambertMaterial,
+	PerspectiveCamera,
+	PlaneGeometry,
+	PointLight,
+	Points,
+	PointsMaterial,
+	RingGeometry,
+	Scene,
+	TextureLoader,
+	Vector2,
+	Vector3,
+	WebGLRenderer
+} from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -31,10 +51,10 @@ let height = window.innerHeight;
 
 export class BackgroundScene {
 	constructor() {
-		this.scene = new THREE.Scene();
-		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-		this.camera.rotation.x = THREE.MathUtils.degToRad(72);
-		this.renderer = new THREE.WebGLRenderer({
+		this.scene = new Scene();
+		this.camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+		this.camera.rotation.x = MathUtils.degToRad(72);
+		this.renderer = new WebGLRenderer({
 			antialias: true,
 			canvas: canvas,
 		 });
@@ -43,7 +63,7 @@ export class BackgroundScene {
 		this.camera.position.set(0, -80, 40);
 		
 		// loader
-		this.loadingManager = new THREE.LoadingManager( () => {
+		this.loadingManager = new LoadingManager( () => {
 			const loadingScreen = document.getElementById( 'loading-screen' );
 			loadingScreen.classList.add( 'loaded' );
 			
@@ -56,13 +76,13 @@ export class BackgroundScene {
 		this.offset = 0.0;
 		
 		//moon
-		this.planetRing = new THREE.Group();
+		this.planetRing = new Group();
 		this.count = 0;
 		this.moon;
 
 		// model
 		this.loader = new GLTFLoader(this.loadingManager);
-		this.model = new THREE.Group();
+		this.model = new Group();
 
 		// postprocessing
 		this.composer = new EffectComposer( this.renderer );
@@ -70,7 +90,7 @@ export class BackgroundScene {
 		
 		// node
 		// this.nodepass = new NodePass();
-		// this.clock = new THREE.Clock();
+		// this.clock = new Clock();
 		// this.frame = new Nodes.NodeFrame();
 
 		let that = this;
@@ -104,22 +124,22 @@ export class BackgroundScene {
 	}
 
 	buildLight() {
-		const light = new THREE.PointLight(0xffffff, 2.5);
+		const light = new PointLight(0xffffff, 2.5);
 		light.position.set(0, -80, 40);
 		this.scene.add(light);
 	}
 
 	buildTerrain() {
-		const material = new THREE.MeshLambertMaterial({
+		const material = new MeshLambertMaterial({
 		  wireframe: true,
 		  // Due to limitations of the OpenGL Core Profile with the WebGL renderer on most platforms linewidth will always be 1 regardless of the set value.
 		  // wireframeLinewidth: 2.0,
 		});
 		const maxTerrainWidth = 250;
-		const plane = new THREE.PlaneGeometry(50, maxTerrainWidth, 60, maxTerrainWidth / (5/3));
+		const plane = new PlaneGeometry(50, maxTerrainWidth, 60, maxTerrainWidth / (5/3));
 
 		// the vector from the plane position
-		let v = new THREE.Vector2();
+		let v = new Vector2();
 		// adapted from: https://stackoverflow.com/a/71305084
 		for(let i = 0; i < plane.attributes.position.count; i++) {
 			v.fromBufferAttribute(plane.attributes.position, i);
@@ -128,7 +148,7 @@ export class BackgroundScene {
 			plane.attributes.position.setZ(i, noiseVal);
 		}
 
-		this.terrain = new THREE.Mesh(plane, material);
+		this.terrain = new Mesh(plane, material);
 		this.terrain.rotateZ(270 * Math.PI / 180);
 		this.scene.add(this.terrain);
 	}
@@ -138,16 +158,16 @@ export class BackgroundScene {
 	}
 	
 	buildPlanetMoon() {
-		const material1 = new THREE.MeshLambertMaterial({
+		const material1 = new MeshLambertMaterial({
 			color: 0x444400
 		});
-		const material2 = new THREE.MeshBasicMaterial({
+		const material2 = new MeshBasicMaterial({
 			color: 0xffffff,
 			wireframe: true
 		});
 
 		const planet = createMultiMaterialObject(
-			new THREE.IcosahedronGeometry(300, 3), [
+			new IcosahedronGeometry(300, 3), [
 				material1, material2
 			]
 		);
@@ -155,17 +175,17 @@ export class BackgroundScene {
 
 		this.planetRing.add(planet);
 
-		const ringMaterial = new THREE.MeshBasicMaterial( { color: 0xeee000 } );
-		const ringGeo = new THREE.RingGeometry( 340, 500, 100, 1 );
-		const ring = new THREE.Mesh( ringGeo, ringMaterial );
+		const ringMaterial = new MeshBasicMaterial( { color: 0xeee000 } );
+		const ringGeo = new RingGeometry( 340, 500, 100, 1 );
+		const ring = new Mesh( ringGeo, ringMaterial );
 		ring.position.copy(planet.position);
-		ring.rotateZ(THREE.MathUtils.degToRad(90));
-		ring.rotateX(THREE.MathUtils.degToRad(35));
+		ring.rotateZ(MathUtils.degToRad(90));
+		ring.rotateX(MathUtils.degToRad(35));
 
 		this.planetRing.add(ring);
 
 		this.moon = createMultiMaterialObject(
-			new THREE.IcosahedronGeometry(50, 3), [
+			new IcosahedronGeometry(50, 3), [
 				material1, material2
 			]
 		);
@@ -180,7 +200,7 @@ export class BackgroundScene {
 		const starXCoeff = 1000 * (window.innerWidth / window.innerHeight);
 		const starZCoeff = 600;
 		for(let i=0; i<3000; i++) {
-			let star = new THREE.Vector3(
+			let star = new Vector3(
 				Math.random() * starXCoeff,
 				0,
 				Math.random() * starZCoeff
@@ -188,18 +208,18 @@ export class BackgroundScene {
 		  	points.push(star);
 		}
 
-		let starGeo = new THREE.BufferGeometry().setFromPoints( points );
-		let sprite = new THREE.TextureLoader().load('resources/img/star.png');
-		let starMaterial = new THREE.PointsMaterial({
+		let starGeo = new BufferGeometry().setFromPoints( points );
+		let sprite = new TextureLoader().load('resources/img/star.png');
+		let starMaterial = new PointsMaterial({
 			color: 0xaaaaaa,
 			size: 0.7,
 			map: sprite
 		});
 
-		let stars = new THREE.Points(starGeo, starMaterial);
+		let stars = new Points(starGeo, starMaterial);
 		stars.position.set(-starXCoeff / 2, 1000, -400);
 		// invert rotation of camera
-		stars.rotation.x = THREE.MathUtils.degToRad(-18);
+		stars.rotation.x = MathUtils.degToRad(-18);
 		this.scene.add(stars);
 	}
 
@@ -216,14 +236,15 @@ export class BackgroundScene {
 				that.model.scale.set(.45, .45, .45);
 				
 				that.model.position.set(0, 0, 13);
-				that.model.rotateX(THREE.MathUtils.degToRad(90));
-				that.model.rotateY(THREE.MathUtils.degToRad(-50));
+				that.model.rotateX(MathUtils.degToRad(90));
+				that.model.rotateY(MathUtils.degToRad(-50));
 				
 				that.setModelXPosition();
 				
 				// animation up and down
-				gsap.from( that.model.position, 3, {
+				gsap.from( that.model.position, {
 					z: 18,
+					duration: 3,
 					yoyo: true,
 					repeat: -1,
 					ease: 'Power2.easeInOut'
@@ -244,7 +265,7 @@ export class BackgroundScene {
 	
 	setModelXPosition() {
 		// Get visible size
-		let vFOV = THREE.MathUtils.degToRad( this.camera.fov ); // convert vertical fov to radians
+		let vFOV = MathUtils.degToRad( this.camera.fov ); // convert vertical fov to radians
 		let visibleHeight = 2 * Math.tan( vFOV / 2 ) * this.model.position.distanceTo(this.camera.position);
 		let visibleWidth = visibleHeight * this.camera.aspect;
 		
@@ -263,8 +284,8 @@ export class BackgroundScene {
 	moveJoint(mouse, degreeLimit) {
 		let degrees = this.getMouseDegrees(mouse.x, mouse.y, degreeLimit);
 		// add default rotation
-		this.model.rotation.y = THREE.MathUtils.degToRad(degrees.x + -50);
-		this.model.rotation.x = THREE.MathUtils.degToRad(degrees.y + 90);
+		this.model.rotation.y = MathUtils.degToRad(degrees.x + -50);
+		this.model.rotation.x = MathUtils.degToRad(degrees.y + 90);
 	}
 	// Check the degree rotation needed
 	getMouseDegrees(x, y, degreeLimit) {
