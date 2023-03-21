@@ -1,4 +1,8 @@
-# My personal website
+# My website
+
+[![Build and deploy](https://github.com/LeGoffMael/me/actions/workflows/webpack.yml/badge.svg)](https://github.com/LeGoffMael/me/actions/workflows/webpack.yml)
+
+## Instructions
 
 Use npm to install
 
@@ -6,7 +10,7 @@ Use npm to install
 npm install
 ```
 
-Use webpack to run it
+### Use webpack to run it
 
 On development (listen to changes)
 ```
@@ -18,6 +22,8 @@ On production
 npm run build
 ```
 
+> **_NOTE:_** Since a model is imported, to avoid CORS issue, a web server is required on local (i.e.: [Web Server for Chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome))
+
 ---
 
 Tools used :
@@ -27,4 +33,4 @@ Tools used :
 - [sass](https://sass-lang.com/)
 - [webpack](https://webpack.js.org/)
 
-See in demo: [legoffmael.fr](https://legoffmael.fr/)
+See in demo: [legoffmael.dev](https://legoffmael.dev)
