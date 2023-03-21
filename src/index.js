@@ -4,6 +4,10 @@ import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faInstagram, faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 
 import i18next from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import en from '../assets/translations/en.json';
+import fr from '../assets/translations/fr.json';
+
 import { BackgroundScene } from './scene.js';
 
 // Load needed icons
@@ -11,85 +15,44 @@ library.add(faInstagram, faGithub, faLinkedinIn)
 dom.watch()
 
 // Internationalization
-i18next.init({
-    lng: 'en',
-    debug: false,
-    resources: {
-      en: {
-        translation: {
-            name: 'Maël Le Goff',
-            position: 'Software Engineer',
-            description: [
-                'I am a Software Engineer recently <a href="https://www.utbm.fr/english/" target="_blank">graduated</a>.',
-                'Born in France, I am now based in Seoul, South Korea working as a full stack developer and UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a>.',
-                '<a href="https://www.legoffmael.fr/resources/RESUME_LE_GOFF_MAEL.pdf" target="_blank">Check out</a> my resume or <a href="mailto:legoffmael@gmail.com" target="_blank">reach out</a> if you are interested by my works.'
-            ],
-            location: 'in South Korea',
-            credits: [
-                'Many thanks to <a href="https://sketchfab.com/Epidural" target="_blank">@Epidural</a> who designed the <a href="https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7" target="_blank">3D model</a>.',
-                '© 2020 Designed and coded by Maël Le Goff.'
-            ],
-            loading: {
-                title: 'Loading...',
-                sub: 'It should not be long',
-            }
-        }
-      },
-      fr: {
-        translation: {
-            name: 'Maël Le Goff',
-            position: 'Ingénieur Logiciel',
-            description: [
-                'Je suis un Ingénieur informatique récemment <a href="https://www.utbm.fr/" target="_blank">diplômé</a>.',
-                'Né en France, je vis désormais à Séoul, Corée du Sud travaillant en tant que développeur full stack et UI designer <a href="https://www.xenoimpact.com/" target="_blank">@XenoImpact</a>.',
-                '<a href="https://www.legoffmael.fr/resources/CV_LE_GOFF_MAEL.pdf" target="_blank">Téléchargez</a> mon CV ou <a href="mailto:legoffmael@gmail.com" target="_blank">contactez-moi</a> si vous êtes intéressé par mon travail.'
-            ],
-            location: 'en Corée du Sud',
-            credits: [
-                'Merci à <a href="https://sketchfab.com/Epidural" target="_blank">@Epidural</a> qui a conçu le <a href="https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7" target="_blank">modèle 3D</a>.',
-                '© 2020 Imaginé et codé par Maël Le Goff.'
-            ],
-            loading: {
-                title: 'Chargement...',
-                sub: 'Ça ne devrait pas être long',
-            }
-        }
-      }
-    }
-  }, function(err, t) {
-    // init set content
-    updateContent();
-  });
+i18next.use(LanguageDetector).init({
+  fallbackLng: 'en',
+  debug: false,
+  resources: {
+    en: {
+      translation: en,
+    },
+    fr: {
+      translation: fr,
+    },
+  },
+}, function(err, t) {
+  // initialize default translation
+  updateContent();
+});
 
-  /**
-   * Update text depending language
-   */
-  function updateContent() {
-    document.getElementById('18n-loading').innerHTML = i18next.t('loading.title');
-    document.getElementById('18n-loading-sub').innerHTML = i18next.t('loading.sub');
-    document.getElementById('18n-name-1').innerHTML = i18next.t('name');
-    document.getElementById('18n-name-2').innerHTML = i18next.t('name');
-    document.getElementById('18n-position').innerHTML = i18next.t('position');
-    document.getElementById('18n-description-1').innerHTML = i18next.t('description.0');
-    document.getElementById('18n-description-2').innerHTML = i18next.t('description.1');
-    document.getElementById('18n-description-3').innerHTML = i18next.t('description.2');
-    document.getElementById('18n-position-location').innerHTML = i18next.t('position') + ' ' + i18next.t('location');
-    document.getElementById('18n-credits-1').innerHTML = i18next.t('credits.0');
-    document.getElementById('18n-credits-2').innerHTML = i18next.t('credits.1');
-  }
-
-  function changeLng(lng) {
-    i18next.changeLanguage(lng);
-    Array.from(document.querySelectorAll('#languages > button')).forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.getElementById('lang-'+lng).classList.add( 'active' );
-  }
-  window.changeLng = changeLng;
-  
-  i18next.on('languageChanged', () => {
-    updateContent();
+// Update text depending on language
+function updateContent() {
+  Array.from(document.querySelectorAll('#languages > button')).forEach(btn => {
+    btn.classList.remove('active');
   });
+  document.getElementById('lang-' + i18next.language).classList.add( 'active' );
+
+  document.getElementById('18n-loading').innerHTML = i18next.t('loading.title');
+  document.getElementById('18n-loading-sub').innerHTML = i18next.t('loading.sub');
+  document.getElementById('18n-name-1').innerHTML = i18next.t('name');
+  document.getElementById('18n-name-2').innerHTML = i18next.t('name');
+  document.getElementById('18n-position').innerHTML = i18next.t('position');
+  document.getElementById('18n-description-1').innerHTML = i18next.t('description.0');
+  document.getElementById('18n-description-2').innerHTML = i18next.t('description.1');
+  document.getElementById('18n-description-3').innerHTML = i18next.t('description.2');
+  document.getElementById('18n-position-location').innerHTML = i18next.t('position') + ' ' + i18next.t('location');
+  document.getElementById('18n-credits-1').innerHTML = i18next.t('credits.0');
+  document.getElementById('18n-credits-2').innerHTML = i18next.t('credits.1');
+}
+
+window.changeLng = i18next.changeLanguage;
+i18next.on('languageChanged', updateContent);
 
 // 3D Scene 
 const env = new BackgroundScene();

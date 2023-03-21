@@ -15,6 +15,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.3.0",
     "gsap": "^3.11.5",
     "i18next": "^22.4.12",
+    "i18next-browser-languagedetector": "^7.0.1",
     "noisejs": "^2.1.0",
     "three": "^0.150.1"
   },

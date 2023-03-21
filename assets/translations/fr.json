@@ -1,0 +1,18 @@
+{
+    "name": "Maël Le Goff",
+    "position": "Ingénieur Logiciel",
+    "description": [
+        "Je suis un Ingénieur informatique récemment <a href='https://www.utbm.fr/' target='_blank'>diplômé</a>.",
+        "Né en France, je vis désormais à Séoul, Corée du Sud travaillant en tant que développeur full stack et UI designer <a href='https://www.xenoimpact.com/' target='_blank'>@XenoImpact</a>.",
+        "<a href='https://www.legoffmael.fr/resources/CV_LE_GOFF_MAEL.pdf' target='_blank'>Téléchargez</a> mon CV ou <a href='mailto:legoffmael@gmail.com' target='_blank'>contactez-moi</a> si vous êtes intéressé par mon travail."
+    ],
+    "location": "en Corée du Sud",
+    "credits": [
+        "Merci à <a href='https://sketchfab.com/Epidural' target='_blank'>@Epidural</a> qui a conçu le <a href='https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7' target='_blank'>modèle 3D</a>.",
+        "© 2023 Imaginé et codé par Maël Le Goff."
+    ],
+    "loading": {
+        "title": "Chargement...",
+        "sub": "Ça ne devrait pas être long"
+    }
+}
