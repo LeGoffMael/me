@@ -1,13 +1,13 @@
 require("../assets/stylesheets/styles.scss");
 
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
-import { faInstagram, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faInstagram, faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 
 import i18next from 'i18next';
 import { BackgroundScene } from './scene.js';
 
 // Load needed icons
-library.add(faInstagram, faGithub, faLinkedin)
+library.add(faInstagram, faGithub, faLinkedinIn)
 dom.watch()
 
 // Internationalization
