@@ -17,6 +17,7 @@ dom.watch()
 // Internationalization
 i18next.use(LanguageDetector).init({
   fallbackLng: 'en',
+  supportedLngs: ['en', 'fr'],
   debug: false,
   resources: {
     en: {
@@ -36,7 +37,10 @@ function updateContent() {
   Array.from(document.querySelectorAll('#languages > button')).forEach(btn => {
     btn.classList.remove('active');
   });
-  document.getElementById('lang-' + i18next.language).classList.add( 'active' );
+  const activeBtn = document.getElementById('lang-' + i18next.language);
+  if(activeBtn !== null) {
+    activeBtn.classList.add( 'active' );
+  }
 
   document.getElementById('18n-loading').innerHTML = i18next.t('loading.title');
   document.getElementById('18n-loading-sub').innerHTML = i18next.t('loading.sub');
