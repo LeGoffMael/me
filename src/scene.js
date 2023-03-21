@@ -30,17 +30,15 @@ import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { DotScreenShader } from 'three/addons/shaders/DotScreenShader.js';
 import { CopyShader } from 'three/addons/shaders/CopyShader.js';
 
-
 // import * as Nodes  from 'three/examples/jsm/nodes/Nodes.js';
 // import { NodePass }  from 'three/examples/jsm/nodes/postprocessing/NodePass.js';
 import { createMultiMaterialObject } from 'three/addons/utils/SceneUtils.js';
 
-/*
-import * as Stats from 'stats.js';
-let stats = new Stats();
-stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild( stats.dom );
-*/
+// import * as Stats from 'stats.js';
+// let stats = new Stats();
+// stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+// document.body.appendChild( stats.dom );
+
 
 const canvas = document.getElementById( 'background' );
 
@@ -396,7 +394,7 @@ export class BackgroundScene {
 			this.terrain.geometry.attributes.position.setZ(planeIndex, noiseVal);
 		});
 
-		this.offset += 0.25;
+		this.offset += 0.2;
 
 		this.planetRing.children[0].rotateZ(-0.0005);
 		this.count += 1;
