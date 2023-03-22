@@ -22,7 +22,7 @@ On production
 npm run build
 ```
 
-> **_NOTE:_** Since a model is imported, to avoid CORS issue, a web server is required on local (i.e.: [Web Server for Chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome))
+> **_NOTE:_** Since a model is imported, to avoid CORS issue, a web server is required on local (i.e.: [Web Server for Chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb))
 
 ---
 

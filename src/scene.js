@@ -39,7 +39,6 @@ import { createMultiMaterialObject } from 'three/addons/utils/SceneUtils.js';
 // stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 // document.body.appendChild( stats.dom );
 
-
 const canvas = document.getElementById( 'background' );
 
 const noise = new Noise(Math.random());
@@ -137,12 +136,12 @@ export class BackgroundScene {
 		const plane = new PlaneGeometry(50, maxTerrainWidth, 60, maxTerrainWidth / (5/3));
 
 		// the vector from the plane position
-		let v = new Vector2();
+		const v = new Vector2();
 		// adapted from: https://stackoverflow.com/a/71305084
 		for(let i = 0; i < plane.attributes.position.count; i++) {
 			v.fromBufferAttribute(plane.attributes.position, i);
-		  const noiseVal = this.map_range(noise.perlin2(v.x/6, v.y/6), 0, 1, -2.5, 2.5);
-		  this.noise.push(noiseVal);
+			const noiseVal = this.map_range(noise.perlin2(v.x/6, v.y/6), 0, 1, -2.5, 2.5);
+		  	this.noise.push(noiseVal);
 			plane.attributes.position.setZ(i, noiseVal);
 		}
 
@@ -390,7 +389,7 @@ export class BackgroundScene {
 		window.addEventListener('resize', this.handleResize, false);
 
 		this.noise.forEach((noiseVal, index) => {
-			const planeIndex = Math.floor((index + this.offset) % this.terrain.geometry.attributes.position.array.length);
+			const planeIndex = Math.floor((index + this.offset) % this.terrain.geometry.attributes.position.count);
 			this.terrain.geometry.attributes.position.setZ(planeIndex, noiseVal);
 		});
 
