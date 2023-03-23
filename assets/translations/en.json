@@ -2,14 +2,15 @@
     "name": "Maël Le Goff",
     "position": "Software Engineer",
     "description": [
-        "I am a Software Engineer recently <a href='https://www.utbm.fr/english/' target='_blank'>graduated</a>.",
-        "Born in France, I am now based in Seoul, South Korea working as a full stack developer and UI designer <a href='https://www.xenoimpact.com/' target='_blank'>@XenoImpact</a>.",
-        "<a href='https://drive.google.com/file/d/1Aei-4kx6K0QFrJNE0IHryoQswIh_9wZa/view?usp=share_link' target='_blank'>Check out</a> my resume or <a href='mailto:legoffmael@gmail.com' target='_blank'>reach out</a> if you are interested by my works."
+        "I am a Software Engineer with a master’s degree of science from <a href='https://www.utbm.fr/english/' target='_blank'>@UTBM</a>.",
+        "I was born in France and have spent the last two years living in Seoul, South Korea on an E-7 visa. I am fluent in English and have an intermediate proficiency in Korean business language.",
+        "For the past two years, I have worked as a Full Stack developer at <a href='https://www.xenoimpact.com/' target='_blank'>@XenoImpact</a>, where I have gained valuable experience in developing and operating both mobile and web applications using Java, Javascript, and Flutter technologies.<br>Now, I am excited to take on a new challenge and explore new opportunities.",
+        "If you are interested in learning more about my experience and skills, please take a look at my <a href='https://drive.google.com/file/d/1Aei-4kx6K0QFrJNE0IHryoQswIh_9wZa/view?usp=share_link' target='_blank'>resume</a> or feel free to <a href='mailto:legoffmael@gmail.com' target='_blank'>reach out</a> to me directly. I am confident that my expertise and passion for technology would make me a valuable asset to your team."
     ],
     "location": "in South Korea",
     "credits": [
         "Many thanks to <a href='https://sketchfab.com/Epidural' target='_blank'>@Epidural</a> who designed the <a href='https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7' target='_blank'>3D model</a>.",
-        "© 2023 Designed and coded by Maël Le Goff."
+        "© {{ currentYear }} Designed and coded by Maël Le Goff."
     ],
     "loading": {
         "title": "Loading...",

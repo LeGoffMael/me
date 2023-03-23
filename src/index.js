@@ -47,12 +47,17 @@ function updateContent() {
   document.getElementById('18n-name-1').innerHTML = i18next.t('name');
   document.getElementById('18n-name-2').innerHTML = i18next.t('name');
   document.getElementById('18n-position').innerHTML = i18next.t('position');
-  document.getElementById('18n-description-1').innerHTML = i18next.t('description.0');
-  document.getElementById('18n-description-2').innerHTML = i18next.t('description.1');
-  document.getElementById('18n-description-3').innerHTML = i18next.t('description.2');
+
+  document.getElementById('description').innerHTML = '';
+  i18next.t('description', { returnObjects: true }).forEach((item, _) => {
+    const p = document.createElement("p");
+    p.innerHTML = item;
+    document.getElementById('description').appendChild(p);
+  });
+
   document.getElementById('18n-position-location').innerHTML = i18next.t('position') + ' ' + i18next.t('location');
   document.getElementById('18n-credits-1').innerHTML = i18next.t('credits.0');
-  document.getElementById('18n-credits-2').innerHTML = i18next.t('credits.1');
+  document.getElementById('18n-credits-2').innerHTML = i18next.t('credits.1', { currentYear: new Date().getFullYear() });
 }
 
 window.changeLng = i18next.changeLanguage;
