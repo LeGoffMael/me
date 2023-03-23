@@ -9,6 +9,7 @@ import en from '../assets/translations/en.json';
 import fr from '../assets/translations/fr.json';
 
 import { BackgroundScene } from './scene.js';
+import { setMyProjects } from './octokit.js';
 
 // Load needed icons
 library.add(faInstagram, faGithub, faLinkedinIn)
@@ -55,6 +56,11 @@ function updateContent() {
     document.getElementById('description').appendChild(p);
   });
 
+  // projects update relative time
+  document.querySelectorAll('.project-updated-at').forEach(function(projectItem) {
+    projectItem.innerHTML = getProjectUpdateRelativeTime(projectItem.dataset.updatedAt);
+  });
+
   document.getElementById('18n-position-location').innerHTML = i18next.t('position') + ' ' + i18next.t('location');
   document.getElementById('18n-credits-1').innerHTML = i18next.t('credits.0');
   document.getElementById('18n-credits-2').innerHTML = i18next.t('credits.1', { currentYear: new Date().getFullYear() });
@@ -62,6 +68,20 @@ function updateContent() {
 
 window.changeLng = i18next.changeLanguage;
 i18next.on('languageChanged', updateContent);
+
+/// Returns the relative time between today and [stringDate]
+export function getProjectUpdateRelativeTime(stringDate) {
+  const today = new Date();
+  const d = new Date(stringDate);
+
+  const diffTime = Math.abs(d - today);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+
+  return ` · ${i18next.t('project_updated', { val: -diffDays })}`;
+}
+
+// GitHub API
+setMyProjects();
 
 // 3D Scene 
 const env = new BackgroundScene();

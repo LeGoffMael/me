@@ -159,6 +159,43 @@ body {
                             border: 2px solid #fff;
                             flex: 1 1 0px;
 
+                            a {
+                                border-bottom: none;
+                            }
+
+                            .project-item-title {
+                                display: flex;
+                                justify-content: space-between;
+
+                                span:first-child {
+                                    text-decoration: underline;
+                                }
+
+                                .project-updated-at {
+                                    font-size: 0.9em;
+                                }
+                            }
+
+                            .project-star {
+                                font-size: 0.9em;
+                                display: flex;
+                                align-items: center;
+                                color: #c1c1c1;
+                                
+                                svg {
+                                    fill: #c1c1c1;
+                                    margin-right: 4px;
+                                }
+
+                                &:hover {
+                                    color: white;
+
+                                    svg {
+                                        fill: white;
+                                    }
+                                }
+                            }
+
                             p {
                                 margin-top: 16px;
                                 color: #c1c1c1;

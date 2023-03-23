@@ -15,5 +15,6 @@
     "loading": {
         "title": "Loading...",
         "sub": "It should not be long"
-    }  
+    },
+    "project_updated": "Updated {{val, relativetime}}"
 }

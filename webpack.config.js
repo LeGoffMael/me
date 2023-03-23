@@ -1,4 +1,6 @@
 const path = require("path");
+const webpack = require("webpack");
+
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -34,7 +36,12 @@ let config = {
         minimize: !isDevMode,
         minimizer: isDevMode ? [] : [new TerserPlugin()],
     },
-    plugins: [new MiniCssExtractPlugin({filename: "styles.css"})].concat(isDevMode ? [new BundleAnalyzerPlugin()] : []),
+    plugins: [
+        new MiniCssExtractPlugin({filename: "styles.css"}),
+        new webpack.DefinePlugin({
+            'process.env.GITHUB_PERSONAL_ACCESS_TOKEN': JSON.stringify(process.env.GITHUB_PERSONAL_ACCESS_TOKEN),
+        })
+    ].concat(isDevMode ? [new BundleAnalyzerPlugin()] : []),
 }
 
 module.exports = config;

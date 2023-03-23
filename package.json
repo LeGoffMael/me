@@ -13,10 +13,13 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@octokit/core": "^4.2.0",
+    "@primer/octicons": "^18.2.0",
     "gsap": "^3.11.5",
     "i18next": "^22.4.12",
     "i18next-browser-languagedetector": "^7.0.1",
     "noisejs": "^2.1.0",
+    "numeral": "^2.0.6",
     "three": "^0.150.1"
   },
   "devDependencies": {
