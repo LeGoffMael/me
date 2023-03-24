@@ -21,8 +21,9 @@ export async function setMyProjects() {
     per_page: maxProjects,
   });
 
-  for(let i = 0; i < Math.min(response.length, maxProjects); i++) {
-    buildProjectCard(response[i])
+  const data = response.data;
+  for(let i = 0; i < Math.min(data.length, maxProjects); i++) {
+    buildProjectCard(data[i])
   }
 
   translateProjects();
@@ -178,6 +179,7 @@ class ActivityEvent {
 /// Fetch last [maxActivityEvents] my activity events from this month
 export async function setActivity() {
   const now = new Date();
+  let response;
 
   try {
     response = await octokit.request('GET /users/legoffmael/events', {
@@ -189,8 +191,9 @@ export async function setActivity() {
     return;
   }
 
-  for(const i in response) {
-    const event = response[i];
+  const data = response.data;
+  for(const i in data) {
+    const event = data[i];
 
     // if event is not from this month, stop loop
     const createdAt = new Date(event['created_at']);
