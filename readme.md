@@ -1,6 +1,7 @@
 # My website
 
 [![Build and deploy](https://github.com/LeGoffMael/me/actions/workflows/webpack.yml/badge.svg)](https://github.com/LeGoffMael/me/actions/workflows/webpack.yml)
+[![Figma](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=white)](https://www.figma.com/file/khgIi94w4kH3GYKKtxTAhV/legoffmael.dev?node-id=2%3A167&t=hdsHKTy89iyFjKKd-1)
 
 ## Instructions
 
