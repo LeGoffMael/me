@@ -31,7 +31,9 @@ jobs:
       run: npm install
 
     - name: Build
-      run: npm run build
+      run: GITHUB_PERSONAL_ACCESS_TOKEN=${github-token} npm run build
+      env:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Pages
       uses: actions/upload-pages-artifact@v1
