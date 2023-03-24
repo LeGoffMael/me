@@ -8,9 +8,10 @@ const githubToken = process.env.GITHUB_PERSONAL_ACCESS_TOKEN;
 
 const octokit = new Octokit({ auth: githubToken });
 
-/// MY PROJECTS ///
-
 const maxProjects = 3;
+const maxActivityEvents = 50;
+
+/// MY PROJECTS ///
 
 /// Fetch all my last 3 updated projects
 export async function setMyProjects() {
@@ -115,6 +116,8 @@ class ActivityEvent {
     switch (json['type']) {
       case 'ForkEvent': // fork a repository
         this.type = 'repositoriesKey';
+        this.repoName = json['payload']['forkee']['full_name'];
+        this.repoUrl = cleanGitHubUrl(json['payload']['forkee']['html_url']);
         break;
       case 'IssueCommentEvent': // new issue is created
         this.type = 'issuesKey';
@@ -156,9 +159,12 @@ class ActivityEvent {
     if(this.targetCount === undefined) {
       this.targetCount = 1;
     }
-
-    this.repoName = json['repo']['name'];
-    this.repoUrl = cleanGitHubUrl(json['repo']['url']);
+    if(this.repoName === undefined) {
+      this.repoName = json['repo']['name'];
+    }
+    if(this.repoUrl === undefined) {
+      this.repoUrl = cleanGitHubUrl(json['repo']['url']);
+    }
   }
 
   /// Returns the target object 
@@ -172,15 +178,32 @@ class ActivityEvent {
   }
 }
 
-/// Fetch all my last 30 activity events
+/// Fetch last [maxActivityEvents] my activity events from this month
 export async function setActivity() {
-  const response = await octokit.request('GET /users/legoffmael/events', {
-    headers: {
-      'X-GitHub-Api-Version': '2022-11-28',
-    },
-  });
+  const now = new Date();
 
-  response.forEach((event, _) => {
+  try {
+    response = await octokit.request('GET /users/legoffmael/events', {
+      headers: {
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+      per_page: maxActivityEvents,
+    });
+  } catch {
+    // hide activity panel if error occured on call
+    hideActivity();
+    return;
+  }
+
+  for(const i in response) {
+    const event = response[i];
+
+    // if event is not from this month, stop loop
+    const createdAt = new Date(event['created_at']);
+    if(now.getFullYear() !== createdAt.getFullYear() || now.getMonth() !== createdAt.getMonth()) {
+      break;
+    }
+
     const e = new ActivityEvent(event);
 
     if(e.type !== undefined) {
@@ -212,7 +235,7 @@ export async function setActivity() {
         myActivity[e.type].repositories[index].count += e.targetCount;
       }
     }
-  });
+  }
 
   buildActivity("activity-commits", myActivity.commitsKey);
   buildActivity("activity-repositories", myActivity.repositoriesKey);
@@ -222,12 +245,15 @@ export async function setActivity() {
 
   // if there is no activity, hide the container
   if(document.querySelectorAll('.timeline-item').length === 0) {
-    console.error('No activity were foud, the timeline will be hidden');
-    document.getElementById('activity').style.display = 'none';
+    hideActivity();
   }
 
-
   translateActivity();
+}
+
+function hideActivity() {
+  console.error('No activity were foud, the timeline will be hidden');
+  document.getElementById('activity').style.display = 'none';
 }
 
 /// Add an activity item in the DOM
@@ -249,10 +275,10 @@ function buildActivity(id, json) {
   const repositoriesList = document.createElement('ul');
 
   json.repositories.forEach((repo, _) => {
-    const targetContent = json.isCommits ? `${repo.count} commits` : json.target !== null ? `<a href='${repo.target.url}' target='_blank'>${repo.target.label}</a>` : '';
+    const targetContent = json.isCommits ? `${repo.count} commits` : repo.target !== null ? `<a href='${repo.target.url}' target='_blank'>${repo.target.label}</a>` : '';
 
     const repoItem = document.createElement('li');
-    repoItem.innerHTML = `<a href='${repo.url}' target='_blank'>${repo.name}/me</a><span class="activity-target">${targetContent}</span>`;
+    repoItem.innerHTML = `<a href='${repo.url}' target='_blank'>${repo.name}</a><span class="activity-target">${targetContent}</span>`;
     
     repositoriesList.appendChild(repoItem);
   });

@@ -98,13 +98,23 @@ body {
 
         #main-wrapper {
             display: flex;
-            align-items: stretch;
             gap: 6%;
+
+            h2 {
+                font-size: 1.1em;
+                font-weight: normal;
+            }
 
             #description-projects-wrapper {
                 flex-basis: 0;
                 flex-grow: 3;
                 text-align: justify;
+
+                // stick to top if activity is very long
+                position: -webkit-sticky; /* Safari */
+                position: sticky;
+                top: 0;
+                align-self: flex-start;
 
                 & > div {
                     margin-bottom: 8%;
@@ -236,8 +246,15 @@ body {
                         border: 4px solid #000;
                     }
 
+                    ul {
+                        padding-left: 20px;
+
+                        li > a {
+                            margin-right: 6px;
+                        }
+                    }
+
                     .activity-target, .activity-target > a {
-                        margin-left: 6px;
                         font-size: 0.9em;
                         color: #c1c1c1;
                         text-decoration: none;
