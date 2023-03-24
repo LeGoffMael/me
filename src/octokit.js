@@ -16,9 +16,6 @@ const maxActivityEvents = 50;
 /// Fetch all my last 3 updated projects
 export async function setMyProjects() {
   const response = await octokit.request('GET /user/repos', {
-    headers: {
-      'X-GitHub-Api-Version': '2022-11-28',
-    },
     affiliation: "owner",
     sort: "updated",
     per_page: maxProjects,
@@ -184,9 +181,6 @@ export async function setActivity() {
 
   try {
     response = await octokit.request('GET /users/legoffmael/events', {
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28',
-      },
       per_page: maxActivityEvents,
     });
   } catch {
