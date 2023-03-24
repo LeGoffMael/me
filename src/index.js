@@ -9,7 +9,7 @@ import en from '../assets/translations/en.json';
 import fr from '../assets/translations/fr.json';
 
 import { BackgroundScene } from './scene.js';
-import { setMyProjects } from './octokit.js';
+import { setMyProjects, setActivity } from './octokit.js';
 
 // Load needed icons
 library.add(faInstagram, faGithub, faLinkedinIn)
@@ -56,32 +56,67 @@ function updateContent() {
     document.getElementById('description').appendChild(p);
   });
 
-  // projects update relative time
-  document.querySelectorAll('.project-updated-at').forEach(function(projectItem) {
-    projectItem.innerHTML = getProjectUpdateRelativeTime(projectItem.dataset.updatedAt);
-  });
-
   document.getElementById('18n-position-location').innerHTML = i18next.t('position') + ' ' + i18next.t('location');
   document.getElementById('18n-credits-1').innerHTML = i18next.t('credits.0');
   document.getElementById('18n-credits-2').innerHTML = i18next.t('credits.1', { currentYear: new Date().getFullYear() });
+
+  translateProjects();
+  translateActivity();
 }
 
-window.changeLng = i18next.changeLanguage;
-i18next.on('languageChanged', updateContent);
+// Translate projects update relative time
+export function translateProjects() {
+  document.querySelectorAll('.project-updated-at').forEach(function(projectItem) {
+    projectItem.innerHTML = getProjectUpdateRelativeTime(projectItem.dataset.updatedAt);
+  });
+}
 
 /// Returns the relative time between today and [stringDate]
-export function getProjectUpdateRelativeTime(stringDate) {
+function getProjectUpdateRelativeTime(stringDate) {
   const today = new Date();
   const d = new Date(stringDate);
 
   const diffTime = Math.abs(d - today);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 
-  return ` · ${i18next.t('project_updated', { val: -diffDays })}`;
+  return ` · ${i18next.t('github.project_updated', { val: -diffDays })}`;
 }
+
+// Translate activities title
+export function translateActivity() {
+  document.querySelectorAll('.timeline-item').forEach(function(activityItem) {
+
+    const title = activityItem.querySelector('.activity-title');
+    const params = { repoCount: title.dataset.repoCount, targetCount: title.dataset.targetCount }
+
+    switch (activityItem.id) {
+      case 'activity-commits':
+        title.innerHTML = i18next.t('github.commits', params);
+        break;
+      case 'activity-repositories':
+        title.innerHTML = i18next.t('github.repositories', params);
+        break;
+      case 'activity-pull-requests':
+        title.innerHTML = i18next.t('github.pull_requests', params);
+        break;
+      case 'activity-issues':
+        title.innerHTML = i18next.t('github.issues', params);
+        break;
+      case 'activity-reviews':
+        title.innerHTML = i18next.t('github.reviews', params);
+        break;
+      default:
+        break;
+    }
+  });
+}
+
+window.changeLng = i18next.changeLanguage;
+i18next.on('languageChanged', updateContent);
 
 // GitHub API
 setMyProjects();
+setActivity();
 
 // 3D Scene 
 const env = new BackgroundScene();

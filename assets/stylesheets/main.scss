@@ -236,12 +236,12 @@ body {
                         border: 4px solid #000;
                     }
 
-                    .activity-description {
-                        span {
-                            margin-left: 6px;
-                            font-size: 0.9em;
-                            color: #c1c1c1;
-                        }
+                    .activity-target, .activity-target > a {
+                        margin-left: 6px;
+                        font-size: 0.9em;
+                        color: #c1c1c1;
+                        text-decoration: none;
+                        border-bottom: none;
                     }
                 }
             }

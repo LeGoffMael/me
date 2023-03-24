@@ -16,5 +16,12 @@
         "title": "Loading...",
         "sub": "It should not be long"
     },
-    "project_updated": "Updated {{val, relativetime}}"
+    "github": {
+        "project_updated": "Updated {{val, relativetime}}",
+        "commits": "Created {{ targetCount }} commits in {{ repoCount }} repositories",
+        "repositories": "Created {{ repoCount }} repositories",
+        "pull_requests": "Open {{ targetCount }} pull requests in {{ repoCount }} repositories",
+        "issues": "Created {{ targetCount }} issue",
+        "reviews": "Reviewed {{ targetCount }} pull request in {{ repoCount }} repository"
+    }
 }

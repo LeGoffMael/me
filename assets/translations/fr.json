@@ -16,5 +16,12 @@
         "title": "Chargement...",
         "sub": "Ça ne devrait pas être long"
     },
-    "project_updated": "Mis à jour {{val, relativetime}}"
+    "github": {
+        "project_updated": "Mis à jour {{val, relativetime}}",
+        "commits": "A créé {{ targetCount }} commits dans {{ repoCount }} répertoires",
+        "repositories": "A créé {{ repoCount }} répertoire",
+        "pull_requests": "A ouvert {{ targetCount }} pull requests dans {{ repoCount }} répertoires",
+        "issues": "A créé {{ targetCount }} issue",
+        "reviews": "A éxaminé {{ targetCount }} pull request dans {{ repoCount }} répertoire"
+    }
 }
