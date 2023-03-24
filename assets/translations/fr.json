@@ -17,11 +17,21 @@
         "sub": "Ça ne devrait pas être long"
     },
     "github": {
-        "project_updated": "Mis à jour {{val, relativetime}}",
-        "commits": "A créé {{ targetCount }} commits dans {{ repoCount }} répertoires",
-        "repositories": "A créé {{ repoCount }} répertoire",
-        "pull_requests": "A ouvert {{ targetCount }} pull requests dans {{ repoCount }} répertoires",
-        "issues": "A créé {{ targetCount }} issue",
-        "reviews": "A éxaminé {{ targetCount }} pull request dans {{ repoCount }} répertoire"
+        "project_title": "Mes derniers projets",
+        "project_updated": "Mis à jour {{ val, relativetime }}",
+        "activity_title": "Activités de {{ val, datetime }}",
+        "commits": "A créé $t(github.count_commits, {'count': {{ targetCount }} }) dans $t(github.count_repositories, {'count': {{ repoCount }} })",
+        "repositories": "A créé $t(github.count_repositories, {'count': {{ repoCount }} })",
+        "pull_requests": "A ouvert $t(github.count_pull_requests, {'count': {{ targetCount }} }) dans $t(github.count_repositories, {'count': {{ repoCount }} })",
+        "issues": "A créé $t(github.count_issues, {'count': {{ targetCount }} })",
+        "reviews": "A éxaminé $t(github.count_reviews, {'count': {{ targetCount }} }) dans $t(github.count_repositories, {'count': {{ repoCount }} })",
+        "count_repositories": "{{count}} répertoire",
+        "count_repositories_other": "{{count}} répertoires",
+        "count_commits": "{{count}} commit",
+        "count_commits_other": "{{count}} commits",
+        "count_issues": "{{count}} issue",
+        "count_issues_other": "{{count}} issues",
+        "count_pull_requests": "{{count}} pull request",
+        "count_pull_requests_other": "{{count}} pull requests"
     }
 }

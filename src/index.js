@@ -19,7 +19,7 @@ dom.watch()
 i18next.use(LanguageDetector).init({
   fallbackLng: 'en',
   supportedLngs: ['en', 'fr'],
-  debug: false,
+  // debug: false,
   resources: {
     en: {
       translation: en,
@@ -59,6 +59,12 @@ function updateContent() {
   document.getElementById('18n-position-location').innerHTML = i18next.t('position') + ' ' + i18next.t('location');
   document.getElementById('18n-credits-1').innerHTML = i18next.t('credits.0');
   document.getElementById('18n-credits-2').innerHTML = i18next.t('credits.1', { currentYear: new Date().getFullYear() });
+
+  document.querySelector('#projects h2').innerHTML = i18next.t('github.projects_title') ;
+  document.querySelector('#activity h2').innerHTML = i18next.t('github.activity_title', { val: new Date(), formatParams: {
+      val: { year: 'numeric', month: 'long' },
+    },
+  });
 
   translateProjects();
   translateActivity();
