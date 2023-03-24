@@ -246,6 +246,16 @@ body {
                         border: 4px solid #000;
                     }
 
+                    .activity-title-wrapper {
+                        display: flex;
+                        align-items: center;
+
+                        svg {
+                            fill: #fff;
+                            margin-right: 8px;
+                        }
+                    }
+
                     ul {
                         padding-left: 20px;
 

@@ -93,7 +93,7 @@ export function translateActivity() {
   document.querySelectorAll('.timeline-item').forEach(function(activityItem) {
 
     const title = activityItem.querySelector('.activity-title');
-    const params = { repoCount: title.dataset.repoCount, targetCount: title.dataset.targetCount }
+    const params = { repoCount: activityItem.dataset.repoCount, targetCount: activityItem.dataset.targetCount }
 
     switch (activityItem.id) {
       case 'activity-commits':

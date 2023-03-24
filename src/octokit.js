@@ -265,24 +265,24 @@ function buildActivity(id, json) {
   const activityItem = document.createElement('div');
   activityItem.id = id;
   activityItem.classList.add('timeline-item');
+  activityItem.dataset.repoCount = json.repoCount;
+  activityItem.dataset.targetCount = json.targetCount;
   
-  // TODO : show json.icon
   activityItem.innerHTML =
-  `<div class="activity-title" data-repo-count="${json.repoCount}" data-target-count="${json.targetCount}"> 
-    <span></span>
+  `<div class='activity-title-wrapper'>
+    ${json.iconSvg}
+    <span class="activity-title"></span>
   </div>`;
 
   const repositoriesList = document.createElement('ul');
-
   json.repositories.forEach((repo, _) => {
     const targetContent = json.isCommits ? `${repo.count} commits` : repo.target !== null ? `<a href='${repo.target.url}' target='_blank'>${repo.target.label}</a>` : '';
 
     const repoItem = document.createElement('li');
     repoItem.innerHTML = `<a href='${repo.url}' target='_blank'>${repo.name}</a><span class="activity-target">${targetContent}</span>`;
-    
+
     repositoriesList.appendChild(repoItem);
   });
-
 
   activityItem.append(repositoriesList);
   document.querySelector('#activity .timeline').appendChild(activityItem);
