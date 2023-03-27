@@ -4,20 +4,20 @@
     "description": [
         "Je suis un Ingénieur informatique diplômé en 2020 de <a href='https://www.utbm.fr/' target='_blank'>l'UTBM</a>.",
         "Je suis né en France et j'ai passé les deux dernières années à Séoul, en Corée du Sud, avec un visa E-7. Je parle couramment l'anglais et j'ai une connaissance intermédiaire de la langue coréenne.",
-        "Ces deux dernières années, j'ai travaillé en tant que développeur Full Stack chez <a href='https://www.xenoimpact.com/' target='_blank'>@XenoImpact</a>, où j'ai acquis une expérience précieuse dans le développement et l'exploitation d'applications mobiles et web en utilisant les technologies {{- java}}Java, {{- js}Javascript et {{- flutter}} Flutter.<br>Aujourd'hui, je suis enthousiaste à l'idée de relever un nouveau défi et d'explorer de nouvelles opportunités.",
+        "Ces deux dernières années, j'ai travaillé en tant que développeur Full Stack chez <a href='https://www.xenoimpact.com/' target='_blank'>@XenoImpact</a>, où j'ai acquis une expérience précieuse dans le développement et l'exploitation d'applications mobiles et web en utilisant les technologies {{- java}}Java, {{- js}}Javascript et {{- flutter}} Flutter.<br>Aujourd'hui, je suis enthousiaste à l'idée de relever un nouveau défi et d'explorer de nouvelles opportunités.",
         "Si vous souhaitez en savoir plus sur mon expérience et mes compétences, jetez un coup d'œil à mon <a href='https://drive.google.com/file/d/1Aei-4kx6K0QFrJNE0IHryoQswIh_9wZa/view?usp=share_link' target='_blank'>CV</a> ou n'hésitez pas à me <a href='mailto:legoffmael@gmail.com' target='_blank'>contacter</a> directement. Je suis convaincu que mon expertise et ma passion feront de moi un atout précieux pour votre équipe."
     ],
-    "location": "en Corée du Sud",
+    "location": "Ingénieur Logiciel en Corée du Sud",
     "credits": [
         "Merci à <a href='https://sketchfab.com/Epidural' target='_blank'>@Epidural</a> qui a conçu le <a href='https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7' target='_blank'>modèle 3D</a>.",
-        "© {{ currentYear }} Imaginé et codé par Maël Le Goff."
+        "© {{ currentYear }} Imaginé et codé avec le 🤍 par Maël Le Goff."
     ],
     "loading": {
         "title": "Chargement...",
         "sub": "Ça ne devrait pas être long"
     },
     "github": {
-        "project_title": "Mes derniers projets",
+        "projects_title": "Mes derniers projets",
         "project_updated": "Mis à jour {{ val, relativetime }}",
         "activity_title": "Activités de {{ val, datetime }}",
         "commits": "A créé $t(github.count_commits, {'count': {{ targetCount }} }) dans $t(github.count_repositories, {'count': {{ repoCount }} })",

@@ -7,6 +7,7 @@ import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import en from '../assets/translations/en.json';
 import fr from '../assets/translations/fr.json';
+import ko from '../assets/translations/ko.json';
 
 import { BackgroundScene } from './scene.js';
 import { setMyProjects, setActivity } from './octokit.js';
@@ -18,7 +19,7 @@ dom.watch()
 // Internationalization
 i18next.use(LanguageDetector).init({
   fallbackLng: 'en',
-  supportedLngs: ['en', 'fr'],
+  supportedLngs: ['en', 'fr', 'ko'],
   // debug: false,
   resources: {
     en: {
@@ -26,6 +27,9 @@ i18next.use(LanguageDetector).init({
     },
     fr: {
       translation: fr,
+    },
+    ko: {
+      translation: ko,
     },
   },
 }, function(err, t) {
@@ -61,7 +65,7 @@ function updateContent() {
     document.getElementById('description').appendChild(p);
   });
 
-  document.getElementById('18n-position-location').innerHTML = i18next.t('position') + ' ' + i18next.t('location');
+  document.getElementById('18n-position-location').innerHTML = i18next.t('location');
   document.getElementById('18n-credits-1').innerHTML = i18next.t('credits.0');
   document.getElementById('18n-credits-2').innerHTML = i18next.t('credits.1', { currentYear: new Date().getFullYear() });
 

@@ -1,0 +1,37 @@
+{
+    "name": "Maël Le Goff",
+    "position": "소프트웨어 엔지니어",
+    "description": [
+        "저는 소프트웨어 엔지니어이며 <a href='https://www.utbm.fr/english/' target='_blank'>@UTBM</a>에서 컴퓨터 공학 석사 학위를 취득하였습니다.",
+        "프랑스 출신이며 현재 E7 비자로 서울에서 거주하고 있습니다. 영어에 능통하고, 한국어는 업무상 소통이 가능한 정도로 중급 수준입니다.",
+        "지난 2년간 <a href='https://www.xenoimpact.com/' target='_blank'>@XenoImpact</a>에서 Full Stack 개발자로 근무하며 {{- java}}Java, {{- js}}Javascript와 {{- flutter}} Flutter을 활용하여 모바일, 웹 어플 개발 및 구현을 통해 다양한 실무 경험을 쌓았습니다.<br>이제는 더욱 새로운 프로젝트와 도전을 향해 나아가고자 합니다.",
+        "저의 역량으로 귀사의 성장을 도울 수 있는 기회를 얻고 싶습니다. 제 경험과 프로젝트에 대한 자세한 내용은 <a href='https://drive.google.com/file/d/1lGPN3Hy49HhZRhbHi0ebjyC6W6wBBpk9/view?usp=sharing' target='_blank'>이력서</a>에서 확인이 가능하며, <a href='mailto:legoffmael@gmail.com' target='_blank'>이메일</a>을 통해 연락 부탁드립니다."
+    ],
+    "location": "Software Engineer in South Korea",
+    "credits": [
+        "<a href='https://sketchfab.com/3d-models/head-drawing-foundation-746f57f1ef664ecbbd2d3e69b2ca32c7' target='_blank'>3D 모델</a>을 디자인 해주신 <a href='https://sketchfab.com/Epidural' target='_blank'>@Epidural</a>님께 감사합니다.",
+        "© {{ currentYear }} Designed and coded with 🤍 by Maël Le Goff."
+    ],
+    "loading": {
+        "title": "로딩중...",
+        "sub": "잠시만 기다려 주세요"
+    },
+    "github": {
+        "projects_title": "주요 프로젝트",
+        "project_updated": "{{ val, relativetime }}",
+        "activity_title": "{{ val, datetime }} 활동",
+        "commits": "$t(github.count_repositories, {'count': {{ repoCount }} })에 $t(github.count_commits, {'count': {{ targetCount }} }) 생성",
+        "repositories": "$t(github.count_repositories, {'count': {{ repoCount }} }) 생성",
+        "pull_requests": "$t(github.count_repositories, {'count': {{ repoCount }} })에 $t(github.count_pull_requests, {'count': {{ targetCount }} }) 생성",
+        "issues": "$t(github.count_issues, {'count': {{ targetCount }} })에 참여",
+        "reviews": "$t(github.count_repositories, {'count': {{ repoCount }} })에 $t(github.count_pull_requests, {'count': {{ targetCount }} }) 리뷰",
+        "count_repositories": "{{count}}개 저장소",
+        "count_repositories_other": "{{count}}개 저장소",
+        "count_commits": "{{count}}개의 commit",
+        "count_commits_other": "{{count}}개의 commits",
+        "count_issues": "{{count}}개의 issue",
+        "count_issues_other": "{{count}}개의 issues",
+        "count_pull_requests": "{{count}}개의 pull request",
+        "count_pull_requests_other": "{{count}}개의 pull requests"
+    }
+}
