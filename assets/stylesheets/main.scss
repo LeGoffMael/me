@@ -127,6 +127,11 @@ body {
                     p {
                         margin-bottom: 1.8em;
                     }
+
+                    i {
+                        font-size: 0.7em;
+                        vertical-align: middle;
+                    }
                 }
 
                 #projects {
@@ -177,8 +182,11 @@ body {
                             .project-item-title {
                                 display: flex;
                                 justify-content: space-between;
-                                align-items: flex-start;
-                                line-height: 1em;
+
+                                i {
+                                    line-height: 1em;
+                                    margin-right: 4px;
+                                }
 
                                 span:first-child {
                                     text-decoration: underline;
@@ -187,25 +195,25 @@ body {
                                 .project-updated-at {
                                     font-size: 0.85em;
                                 }
-                            }
 
-                            .project-star {
-                                margin-left: 12px;
-                                font-size: 0.9em;
-                                display: flex;
-                                align-items: flex-start;
-                                vertical-align: middle;
-                                
-                                svg {
-                                    fill: #c1c1c1;
-                                    margin-right: 4px;
-                                }
-
-                                &:hover {
-                                    color: white;
+                                .project-star {
+                                    margin-left: 12px;
+                                    font-size: 0.9em;
+                                    display: flex;
+                                    align-items: flex-start;
+                                    padding-top: 2px; // to align with first line + tech icon
 
                                     svg {
-                                        fill: white;
+                                        fill: #c1c1c1;
+                                        margin-right: 4px;
+                                    }
+    
+                                    &:hover {
+                                        color: white;
+    
+                                        svg {
+                                            fill: white;
+                                        }
                                     }
                                 }
                             }
@@ -241,7 +249,7 @@ body {
                         content: "";
                         display: block;
                         position: absolute;
-                        top: 30px;
+                        top: 28px; // to be perfectly aligned
                         left: -11px;
                         width: 12px;
                         height: 12px;

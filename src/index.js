@@ -50,7 +50,12 @@ function updateContent() {
   document.getElementById('18n-position').innerHTML = i18next.t('position');
 
   document.getElementById('description').innerHTML = '';
-  i18next.t('description', { returnObjects: true }).forEach((item, _) => {
+  i18next.t('description', {
+    returnObjects: true,
+    java: "<i class='devicon-java-plain'/></i>",
+    js: "<i class='devicon-javascript-plain'/></i>",
+    flutter: "<i class='devicon-flutter-plain'/></i>"
+  }).forEach((item, _) => {
     const p = document.createElement("p");
     p.innerHTML = item;
     document.getElementById('description').appendChild(p);

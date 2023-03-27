@@ -35,6 +35,18 @@ export async function setMyProjects() {
   translateProjects();
 }
 
+// Function that returns the techno used based on the progamming language
+// For now only used to show flutter instead of dart since it is more famous
+function technoWrapper(val) {
+  const lang = val.toLowerCase();
+  switch (lang) {
+    case 'dart':
+      return 'flutter'
+    default:
+      return lang;
+  }
+}
+
 /// Add a project item in the DOM
 function buildProjectCard(json) {
   const projectCard = document.createElement('a');
@@ -49,16 +61,18 @@ function buildProjectCard(json) {
   // TODO : 
   // - add language icon ${json['language']}
   projectCard.innerHTML =
-  `<div>
-    <div class='project-item-title'>
-      <div>
-        <span>${json['name']}</span>
-        <span data-updated-at=${json['pushed_at']} class='project-updated-at'></span>
-      </div>
-      <a class='project-star' href='${json['html_url'] + '/stargazers'}' title='${json['name']} stargazers' target='_blank'>${octicons.star.toSVG()} ${stars}</a>
+  `<div class='project-item-title'>
+    <div>
+      <i class='devicon-${technoWrapper(json['language'])}-plain'/></i>
+      <span>${json['name']}</span>
+      <span data-updated-at=${json['pushed_at']} class='project-updated-at'></span>
     </div>
-    <p>${json['description']}</p>
-  </div>`;
+    <a class='project-star' href='${json['html_url'] + '/stargazers'}' title='${json['name']} stargazers' target='_blank'>
+      ${octicons.star.toSVG()}
+      <span> ${stars}</span>
+    </a>
+  </div>
+  <p>${json['description']}</p>`;
 
   document.getElementById('projects-row').appendChild(projectCard);
 }
