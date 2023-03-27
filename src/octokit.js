@@ -16,14 +16,20 @@ const maxActivityEvents = 50;
 /// Fetch all my last 3 updated projects
 export async function setMyProjects() {
   const response = await octokit.request('GET /user/repos', {
-    affiliation: "owner",
-    sort: "updated",
-    per_page: maxProjects,
+    affiliation: 'owner,collaborator',
+    sort: 'pushed',
   });
 
   const data = response.data;
-  for(let i = 0; i < Math.min(data.length, maxProjects); i++) {
-    buildProjectCard(data[i])
+
+  let projectCount = 0;
+  for(let i = 0; i < data.length && projectCount < maxProjects; i++) {
+    const item = data[i];
+    // exclude project with less than 10 stars and forks from projects list
+    if(item['fork'] == true || item['stargazers_count'] < 10) continue;
+
+    buildProjectCard(item);
+    projectCount++;
   }
 
   translateProjects();
@@ -47,7 +53,7 @@ function buildProjectCard(json) {
     <div class='project-item-title'>
       <div>
         <span>${json['name']}</span>
-        <span data-updated-at=${json['updated_at']} class='project-updated-at'></span>
+        <span data-updated-at=${json['pushed_at']} class='project-updated-at'></span>
       </div>
       <a class='project-star' href='${json['html_url'] + '/stargazers'}' title='${json['name']} stargazers' target='_blank'>${octicons.star.toSVG()} ${stars}</a>
     </div>
