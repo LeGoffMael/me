@@ -374,6 +374,9 @@ export class BackgroundScene {
 	handleResize() {
 		// check for mobile devices when scroll showed up
 		if (window.innerWidth !== width || window.innerHeight !== height) {
+			width = window.innerWidth;
+			height = window.innerHeight;
+
 			this.camera.aspect = window.innerWidth / window.innerHeight;
 			this.camera.updateProjectionMatrix();
 			
