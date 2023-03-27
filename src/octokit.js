@@ -9,7 +9,7 @@ const githubToken = process.env.GITHUB_PERSONAL_ACCESS_TOKEN;
 const octokit = new Octokit({ auth: githubToken });
 
 const maxProjects = 3;
-const maxActivityEvents = 50;
+const maxActivityEvents = 100; // max possible results per page
 
 /// MY PROJECTS ///
 
@@ -111,7 +111,12 @@ const myActivity = {
 /// Replace API url `api.github.com` by html url `github.com`
 function cleanGitHubUrl(url) {
   return url.replace('https://api.github.com', 'https://github.com');
-} 
+}
+
+/// Replace repository API url `api.github.com/repos` by html url `github.com`
+function cleanRepoGitHubUrl(url) {
+  return url.replace('https://api.github.com/repos', 'https://github.com');
+}
 
 class ActivityEvent {
   constructor(json) {
@@ -123,10 +128,15 @@ class ActivityEvent {
         this.repoName = json['payload']['forkee']['full_name'];
         this.repoUrl = cleanGitHubUrl(json['payload']['forkee']['html_url']);
         break;
-      case 'IssueCommentEvent': // new issue is created
+      case 'IssuesEvent': // an issue is opened or closed
         this.type = 'issuesKey';
         this.targetLabel = '#' + json['payload']['issue']['number'];
-        this.targetUrl = cleanGitHubUrl(json['payload']['issue']['url']);
+        this.targetUrl = cleanGitHubUrl(json['payload']['issue']['html_url']);
+        break;
+      case 'IssueCommentEvent': // comment is added to an issue
+        this.type = 'issuesKey';
+        this.targetLabel = '#' + json['payload']['issue']['number'];
+        this.targetUrl = cleanGitHubUrl(json['payload']['issue']['html_url']);
         break;
       case 'PublicEvent': // a repository is made public
         this.type = 'repositoriesKey';
@@ -134,12 +144,12 @@ class ActivityEvent {
       case 'PullRequestEvent': // pull requests is opened or closed
         this.type = 'pullRequestsKey';
         this.targetLabel = '#' + json['payload']['pull_request']['number'];
-        this.targetUrl = cleanGitHubUrl(json['payload']['pull_request']['url']);
+        this.targetUrl = cleanGitHubUrl(json['payload']['pull_request']['html_url']);
         break;
       case 'PullRequestReviewThreadEvent': // pull request comment thread marked as resolved
         this.type = 'reviewsKey';
         this.targetLabel = '#' + json['payload']['pull_request']['number'];
-        this.targetUrl = cleanGitHubUrl(json['payload']['pull_request']['url']);
+        this.targetUrl = cleanGitHubUrl(json['payload']['pull_request']['html_url']);
         break;
       case 'PushEvent': // commit is pushed
         this.type = 'commitsKey';
@@ -167,7 +177,7 @@ class ActivityEvent {
       this.repoName = json['repo']['name'];
     }
     if(this.repoUrl === undefined) {
-      this.repoUrl = cleanGitHubUrl(json['repo']['url']);
+      this.repoUrl = cleanRepoGitHubUrl(json['repo']['url']);
     }
   }
 
@@ -221,20 +231,27 @@ export async function setActivity() {
         target: target
       }
 
-      // count all targets for this type
-      myActivity[e.type].targetCount += e.targetCount;
+      // index of this repo with this target
+      const index = myActivity[e.type].repositories.findIndex(r =>
+        r.name === e.repoName && (target !== null
+          ? r.target.url === target.url
+          : true));
 
-      const index = myActivity[e.type].repositories.findIndex(r => r.name === e.repoName);
+      // count all unique targets for this type
+      if(index === -1 || e.type == 'commitsKey') {
+        myActivity[e.type].targetCount += e.targetCount;
+      }
 
-      // if repo data is missing or if it an issue/PR and not in list yet we can add it to the list 
-      if(index === -1 || (target !== null && myActivity[e.type].repositories[index].target.url !== target.url)) {
-        if(index === -1) {
-          // count all unique repositories for this type
+      // if repo data with target does not exists yet
+      if(index === -1) {
+        // count all unique repositories for this type
+        if(myActivity[e.type].repositories.findIndex(r =>
+          r.name === e.repoName) === -1) {
           myActivity[e.type].repoCount++;
         }
         myActivity[e.type].repositories.push(repo);
       } else  {
-        // if it is a commit event and repo exists
+        // count duplicate event for this repository (i.e. nb commits)
         myActivity[e.type].repositories[index].count += e.targetCount;
       }
     }

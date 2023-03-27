@@ -23,7 +23,7 @@
         "commits": "A créé $t(github.count_commits, {'count': {{ targetCount }} }) dans $t(github.count_repositories, {'count': {{ repoCount }} })",
         "repositories": "A créé $t(github.count_repositories, {'count': {{ repoCount }} })",
         "pull_requests": "A ouvert $t(github.count_pull_requests, {'count': {{ targetCount }} }) dans $t(github.count_repositories, {'count': {{ repoCount }} })",
-        "issues": "A créé $t(github.count_issues, {'count': {{ targetCount }} })",
+        "issues": "A participé à $t(github.count_issues, {'count': {{ targetCount }} })",
         "reviews": "A éxaminé $t(github.count_reviews, {'count': {{ targetCount }} }) dans $t(github.count_repositories, {'count': {{ repoCount }} })",
         "count_repositories": "{{count}} répertoire",
         "count_repositories_other": "{{count}} répertoires",
