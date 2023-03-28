@@ -7,7 +7,6 @@ body {
     /* 	font-family: 'Montserrat'; */
     color: #fff;
     background-color: #000;
-    cursor: crosshair;
 
     a {
         text-decoration: none;
@@ -60,6 +59,11 @@ body {
         margin: 2% 10% 0 10%;
         font-weight: 300;
 
+        @include md-max {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
         #languages {
             display: flex;
             flex-direction: row;
@@ -97,15 +101,201 @@ body {
             }
         }
 
-        #description {
-            margin-bottom: 10%;
-            max-width: 750px;
-            
-            text-align: justify;
-            font-size: 1.5em;
+        #main-wrapper {
+            display: flex;
+            gap: 6%;
+
+            h2 {
+                font-size: 1.1em;
+                font-weight: normal;
+            }
+
+            #description-projects-wrapper {
+                flex-basis: 0;
+                flex-grow: 3;
+                text-align: justify;
+
+                // stick to top if activity is very long
+                position: -webkit-sticky; /* Safari */
+                position: sticky;
+                top: 0;
+                align-self: flex-start;
+
+                & > div {
+                    margin-bottom: 8%;
+                }
+
+                #description {
+                    line-height: 1.3;
+                    font-size: 1.2em;
+
+                    p {
+                        margin-bottom: 1.8em;
+                    }
+
+                    i {
+                        font-size: 0.7em;
+                        vertical-align: middle;
+                    }
+                }
+
+                #projects {
+                    #projects-title {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        margin-bottom: 24px;
     
-            p {
-                margin-bottom: 2em;
+                        // horizontal line
+                        &:before, &:after{
+                            content: "";
+                            border-bottom: 2px solid #fff;
+                            margin: auto;
+                        }
+                        &:before {
+                            flex: 1;
+                        }
+                        &:after {
+                            flex: 1;
+                        }
+
+                        h2 {
+                            margin: 0 20px;
+                        }
+                    }
+
+                    #projects-row {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 30px;
+
+                        @include md-max {
+                            flex-direction: column;
+                            gap: 12px; 
+                        }
+
+                        .project-item {
+                            border-radius: 16px;
+                            padding: 16px;
+                            border: 2px solid #fff;
+                            flex: 1 1 0px;
+
+                            a {
+                                border-bottom: none;
+                            }
+
+                            .project-item-title {
+                                display: flex;
+                                justify-content: space-between;
+
+                                i {
+                                    line-height: 1em;
+                                    margin-right: 4px;
+                                }
+
+                                span:first-child {
+                                    text-decoration: underline;
+                                }
+
+                                .project-updated-at {
+                                    font-size: 0.85em;
+                                }
+
+                                .project-star {
+                                    margin-left: 12px;
+                                    font-size: 0.9em;
+                                    display: flex;
+                                    align-items: flex-start;
+                                    padding-top: 2px; // to align with first line + tech icon
+
+                                    svg {
+                                        fill: #c1c1c1;
+                                        margin-right: 4px;
+                                    }
+    
+                                    &:hover {
+                                        color: white;
+    
+                                        svg {
+                                            fill: white;
+                                        }
+                                    }
+                                }
+                            }
+
+                            p {
+                                margin-top: 16px;
+                                color: #c1c1c1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            #activity {
+                flex-basis: 0;
+                flex-grow: 1;
+
+                @include xl-max {
+                    display: none;
+                }
+
+                .timeline {
+                    border-left: 2px solid #e4e8eb;
+                    padding-bottom: 30px;
+                }
+
+                .timeline-item {
+                    position: relative;
+                    padding-top: 30px;
+                    padding-left: 20px;
+
+                    &::after {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        top: 28px; // to be perfectly aligned
+                        left: -11px;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 12px;
+                        background: #fff;
+                        border: 4px solid #000;
+                    }
+
+                    .activity-title-wrapper {
+                        display: flex;
+
+                        svg {
+                            fill: #fff;
+                            margin-right: 8px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: flex-start;
+                        }
+
+                        span {
+                            flex: 1;
+                            align-self: flex-start;
+                            line-height: 1em;
+                        }
+                    }
+
+                    ul {
+                        padding-left: 20px;
+
+                        li > a {
+                            margin-right: 6px;
+                        }
+                    }
+
+                    .activity-target, .activity-target > a {
+                        font-size: 0.9em;
+                        color: #c1c1c1;
+                        text-decoration: none;
+                        border-bottom: none;
+                    }
+                }
             }
         }
 
